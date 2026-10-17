@@ -172,6 +172,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Mobilde Lightbox içinde parmakla sağa/sola kaydırma (Swipe) desteği
+    let touchStartX = 0;
+    if (lightboxBody) {
+        lightboxBody.addEventListener('touchstart', (e) => {
+            if (e.changedTouches && e.changedTouches.length > 0) {
+                touchStartX = e.changedTouches[0].screenX;
+            }
+        }, { passive: true });
+
+        lightboxBody.addEventListener('touchend', (e) => {
+            if (currentGallery.length > 1 && e.changedTouches && e.changedTouches.length > 0) {
+                const diffX = e.changedTouches[0].screenX - touchStartX;
+                if (Math.abs(diffX) > 40) {
+                    if (diffX < 0 && lightboxNext) {
+                        lightboxNext.click();
+                    } else if (diffX > 0 && lightboxPrev) {
+                        lightboxPrev.click();
+                    }
+                }
+            }
+        }, { passive: true });
+    }
+
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
     if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
     document.addEventListener('keydown', (e) => {
