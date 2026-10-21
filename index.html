@@ -242,8 +242,9 @@
                 <ul class="nav-list">
                     <li><a href="#hizmetlerimiz" class="nav-link">Hizmetlerimiz</a></li>
                     <li><a href="#projelerimiz" class="nav-link">Projelerimiz</a></li>
-                    <li><a href="#video-galeri" class="nav-link">Uygulama Videoları</a></li>
-                    <li><a href="#teklif-hesaplama" class="nav-link">Ölçü ve Teklif Hesaplama</a></li>
+                    <li><a href="#video-galeri" class="nav-link">Videolar</a></li>
+                    <li><a href="#teklif-hesaplama" class="nav-link">Ölçü &amp; Teklif</a></li>
+                    <li><a href="#geri-bildirim" class="nav-link">Geri Bildirim</a></li>
                     <li><a href="#sss" class="nav-link">S.S.S.</a></li>
                     <li><a href="#iletisim" class="nav-link">İletişim</a></li>
                 </ul>
@@ -1002,9 +1003,200 @@
                                 <input type="text" id="extraNote" name="extraNote" placeholder="Örn: Antrasit gri profil, ısıcamlı, 3. kat daire vb.">
                             </div>
 
+                            <!-- KVKK ve Ön Bilgilendirme Onayı -->
+                            <div class="form-legal-consent">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="kvkkQuoteConsent" required checked>
+                                    <span>
+                                        <button type="button" class="legal-inline-link" data-open-legal="kvkk">6698 Sayılı KVKK Aydınlatma Metni</button>'ni ve <button type="button" class="legal-inline-link" data-open-legal="kullanim">Ön Keşif Koşulları</button>'nı okudum. Paylaştığım ölçü ve iletişim bilgilerinin teklif oluşturulması amacıyla WhatsApp üzerinden iletilmesini kabul ediyorum. *
+                                    </span>
+                                </label>
+                            </div>
+
                             <button type="submit" class="btn btn-whatsapp btn-block btn-lg">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.625.846 5.059 2.284 7.033l-1.494 5.46 5.601-1.469c1.908 1.252 4.185 1.976 6.609 1.976 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>
                                 WhatsApp ile Fiyat Teklifi İste
+                            </button>
+                            <p class="form-legal-footnote">
+                                * Bu form ön bilgilendirme amaçlıdır. Kesin fiyatlandırma, ücretsiz yerinde milimetrik ölçü ve keşif sonrasında belirlenir.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Müşteri Memnuniyeti, Yorumlar ve Geri Bildirim Bölümü -->
+        <section class="section feedback-section" id="geri-bildirim">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">MÜŞTERİ DENEYİMİ &amp; KALİTE GÜVENCESİ</span>
+                    <h2 class="section-title">Müşteri Yorumları ve Geri Bildirim</h2>
+                    <p class="section-desc">
+                        Düzce ve çevre illerde tamamladığımız cam balkon, PVC doğrama, sineklik ve alüminyum projelerimizde müşteri memnuniyetini her zaman ilk sırada tutuyoruz. Hizmetlerimiz hakkındaki görüş, öneri ve değerlendirmelerinizi bizimle paylaşabilirsiniz.
+                    </p>
+                    <div class="feedback-rating-pill">
+                        <div class="rating-stars-static" aria-label="5 üzerinden 4.9 yıldız">★★★★★</div>
+                        <span><strong>4.9 / 5.0</strong> Ortalama Müşteri Memnuniyeti • %100 Kendi İmalatımız &amp; Garantili Montaj</span>
+                    </div>
+                    <div class="mobile-swipe-hint">
+                        <span>&#8592; Yorumları parmağınızla yana kaydırarak okuyabilirsiniz &#8594;</span>
+                    </div>
+                </div>
+
+                <!-- Gerçek Bölge ve Hizmet Odaklı Müşteri Yorumları -->
+                <div class="reviews-grid" id="reviewsGrid">
+                    <article class="review-card">
+                        <div class="review-card-top">
+                            <div class="review-author">
+                                <span class="author-avatar">B.K.</span>
+                                <div>
+                                    <h4>Bahadır Bey</h4>
+                                    <span>Düzce Merkez • Katlanır Cam Balkon &amp; Panjur</span>
+                                </div>
+                            </div>
+                            <span class="review-stars" aria-label="5 Yıldız">★★★★★</span>
+                        </div>
+                        <p class="review-text">
+                            "Evimizin katlanır cam balkon, elektrikli panjur, sürme kapı, PVC doğrama ve stor sineklik işlerini komple Mutlu PVC ve Alüminyum ekibine yaptırdık. Ölçüden montaja kadar her aşamada çok titiz çalıştılar, işçilik kalitesi gerçekten birinci sınıf."
+                        </p>
+                        <span class="review-badge">Doğrulanmış Montaj • Anahtar Teslim</span>
+                    </article>
+
+                    <article class="review-card">
+                        <div class="review-card-top">
+                            <div class="review-author">
+                                <span class="author-avatar">A.Y.</span>
+                                <div>
+                                    <h4>Ahmet Y.</h4>
+                                    <span>Düzce Aziziye • PVC Doğrama &amp; Cam Korkuluk</span>
+                                </div>
+                            </div>
+                            <span class="review-stars" aria-label="5 Yıldız">★★★★★</span>
+                        </div>
+                        <p class="review-text">
+                            "Aziziye bölgesindeki dairemizin pencereleri, 10 mm temperli cam korkulukları ve plise sineklikleri söz verilen günde eksiksiz teslim edildi. Kendi imalatları olduğu için hem fiyat olarak çok makul hem de malzeme kalitesi çok yüksek."
+                        </p>
+                        <span class="review-badge">Doğrulanmış Montaj • PVC &amp; Sineklik</span>
+                    </article>
+
+                    <article class="review-card">
+                        <div class="review-card-top">
+                            <div class="review-author">
+                                <span class="author-avatar">M.D.</span>
+                                <div>
+                                    <h4>Murat D.</h4>
+                                    <span>Kaynaşlı &amp; Denizkent • Isıcamlı Sürme &amp; Vitrin</span>
+                                </div>
+                            </div>
+                            <span class="review-stars" aria-label="5 Yıldız">★★★★★</span>
+                        </div>
+                        <p class="review-text">
+                            "Hem iş yerimizin C60 alüminyum vitrin doğramasını hem de evimizin ısıcamlı eşiksiz sürme cam balkonunu yaptırdık. Soğuk ve rüzgar yalıtımı mükemmel oldu. Düzce'de güvenle iş teslim edebileceğiniz nadir ustalardan."
+                        </p>
+                        <span class="review-badge">Doğrulanmış Montaj • Alüminyum &amp; Cam Balkon</span>
+                    </article>
+                </div>
+
+                <!-- İnteraktif Geri Bildirim & Değerlendirme Formu -->
+                <div class="feedback-form-wrapper">
+                    <div class="feedback-info-col">
+                        <span class="feedback-tag">SİZİN GÖRÜŞÜNÜZ BİZİM İÇİN DEĞERLİ</span>
+                        <h3>Deneyiminizi Paylaşın veya Destek Talebi Oluşturun</h3>
+                        <p>
+                            Tamamlanan montajlarımız hakkındaki memnuniyetinizi, hizmet kalitemizi geliştirecek önerilerinizi veya mevcut uygulamalarınızla ilgili servis/destek taleplerinizi doğrudan firma yetkilimize iletebilirsiniz.
+                        </p>
+                        <ul class="feedback-perks">
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2.3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Doğrudan firma yetkilisi tarafından incelenir</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2.3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Satış sonrası montaj ve ayar taleplerine hızlı dönüş</span>
+                            </li>
+                            <li>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2.3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>6698 sayılı KVKK kapsamında kişisel verileriniz güvence altındadır</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="feedback-card">
+                        <form id="feedbackForm" class="feedback-form">
+                            <div class="feedback-form-header">
+                                <h4>Hızlı Geri Bildirim Formu</h4>
+                                <p>Puanınızı seçin ve mesajınızı aşağıya yazın</p>
+                            </div>
+
+                            <!-- Yıldız Puanlama Seçici -->
+                            <div class="star-rating-group">
+                                <label>Memnuniyet Puanınız *</label>
+                                <div class="star-selector" id="starSelector" role="radiogroup" aria-label="Memnuniyet Puanı">
+                                    <button type="button" class="star-btn active" data-rating="1" aria-label="1 Yıldız">★</button>
+                                    <button type="button" class="star-btn active" data-rating="2" aria-label="2 Yıldız">★</button>
+                                    <button type="button" class="star-btn active" data-rating="3" aria-label="3 Yıldız">★</button>
+                                    <button type="button" class="star-btn active" data-rating="4" aria-label="4 Yıldız">★</button>
+                                    <button type="button" class="star-btn active" data-rating="5" aria-label="5 Yıldız">★</button>
+                                    <span class="star-rating-label" id="starRatingLabel">5 / 5 - Çok Memnunum</span>
+                                </div>
+                                <input type="hidden" id="feedbackRating" name="feedbackRating" value="5">
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="feedbackName">Adınız Soyadınız *</label>
+                                    <input type="text" id="feedbackName" name="feedbackName" placeholder="Örn: Ali Yılmaz" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="feedbackCategory">Geri Bildirim Konusu *</label>
+                                    <select id="feedbackCategory" name="feedbackCategory" required>
+                                        <option value="Müşteri Memnuniyeti / Teşekkür">Müşteri Memnuniyeti / Yorum</option>
+                                        <option value="Öneri / Görüş">Hizmet Önerisi / Görüş</option>
+                                        <option value="Satış Sonrası Destek / Ayar Talebi">Satış Sonrası Destek / Servis Talebi</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="feedbackService">Aldığınız Hizmet</label>
+                                    <select id="feedbackService" name="feedbackService">
+                                        <option value="Cam Balkon / Katlanır Cam">Cam Balkon / Katlanır Cam</option>
+                                        <option value="Sineklik (Plise / Stor)">Sineklik (Plise / Stor Sineklik)</option>
+                                        <option value="PVC Pencere / Kapı Doğrama">PVC Pencere / Kapı Doğrama</option>
+                                        <option value="Kış Bahçesi / Giyotin Cam">Kış Bahçesi / Giyotin Cam</option>
+                                        <option value="Alüminyum Doğrama / Korkuluk">Alüminyum Doğrama / Korkuluk</option>
+                                        <option value="Diğer Yapı Çözümleri">Panjur / Duşakabin / Çelik Kapı / Diğer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="feedbackRegion">İlçe / Bölge</label>
+                                    <input type="text" id="feedbackRegion" name="feedbackRegion" placeholder="Örn: Düzce Merkez, Kaynaşlı vb.">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="feedbackMessage">Görüş, Yorum veya Talebiniz *</label>
+                                <textarea id="feedbackMessage" name="feedbackMessage" rows="3" placeholder="Yapılan uygulama, işçilik veya talebiniz hakkındaki düşüncelerinizi yazabilirsiniz..." required></textarea>
+                            </div>
+
+                            <div class="form-legal-consent">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="kvkkFeedbackConsent" required checked>
+                                    <span>
+                                        <button type="button" class="legal-inline-link" data-open-legal="kvkk">KVKK Aydınlatma Metni</button>'ni okudum; geri bildirimimin değerlendirilmesi ve tarafıma dönüş yapılabilmesi amacıyla işlenmesini kabul ediyorum. *
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="feedback-success-msg" id="feedbackSuccessMsg" role="status" aria-live="polite" hidden>
+                                <strong>Teşekkür ederiz!</strong> Geri bildiriminiz kaydedildi ve müşteri ilişkileri hattımıza yönlendiriliyor.
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                Geri Bildirimi Gönder
                             </button>
                         </form>
                     </div>
@@ -1166,19 +1358,20 @@
                         <li><a href="#projelerimiz">Tamamlanan Projelerimiz</a></li>
                         <li><a href="#video-galeri">Uygulama Videoları (Reels)</a></li>
                         <li><a href="#teklif-hesaplama">Ölçü ve Teklif Hesaplama</a></li>
+                        <li><a href="#geri-bildirim">Müşteri Yorumları &amp; Geri Bildirim</a></li>
                         <li><a href="#sss">Sıkça Sorulan Sorular</a></li>
                         <li><a href="#iletisim">İletişim Bilgileri</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h4>Başlıca Çözümlerimiz</h4>
+                    <h4>Kurumsal &amp; Yasal</h4>
                     <ul>
-                        <li><a href="#hizmetlerimiz">Isıcamlı & Katlanır Cam Balkon</a></li>
-                        <li><a href="#hizmetlerimiz">Kumandalı Giyotin & Tavan Camı</a></li>
-                        <li><a href="#hizmetlerimiz">PVC Pencere & Sürme Sistemleri</a></li>
-                        <li><a href="#hizmetlerimiz">C60 Alüminyum & Fotoselli Kapı</a></li>
-                        <li><a href="#hizmetlerimiz">Alüminyum & Temperli Cam Korkuluk</a></li>
+                        <li><button type="button" class="footer-legal-link" data-open-legal="kvkk">KVKK Aydınlatma Metni</button></li>
+                        <li><button type="button" class="footer-legal-link" data-open-legal="gizlilik">Gizlilik Politikası</button></li>
+                        <li><button type="button" class="footer-legal-link" data-open-legal="cerez">Çerez (Cookie) Politikası</button></li>
+                        <li><button type="button" class="footer-legal-link" data-open-legal="kullanim">Kullanım Koşulları &amp; Yasal Uyarı</button></li>
+                        <li><button type="button" class="footer-legal-link" id="openCookieSettingsBtn">Çerez Tercihlerini Yönet</button></li>
                     </ul>
                 </div>
 
@@ -1207,10 +1400,146 @@
 
             <div class="footer-bottom">
                 <p>&copy; <span id="currentYear">2026</span> Mutlu PVC ve Alüminyum (mutlupvcaluminyum.com). Tüm hakları saklıdır.</p>
-                <p>Düzce Merkez | Kendi İmalatımız & Anahtar Teslim İşçilik</p>
+                <div class="footer-bottom-links">
+                    <button type="button" class="footer-bottom-btn" data-open-legal="kvkk">KVKK</button>
+                    <span>•</span>
+                    <button type="button" class="footer-bottom-btn" data-open-legal="gizlilik">Gizlilik</button>
+                    <span>•</span>
+                    <button type="button" class="footer-bottom-btn" data-open-legal="cerez">Çerez Politikası</button>
+                    <span>•</span>
+                    <button type="button" class="footer-bottom-btn" data-open-legal="kullanim">Yasal Uyarı</button>
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- Yasal Bilgilendirme, KVKK, Gizlilik ve Çerez Politikası Modalı -->
+    <div class="legal-modal" id="legalModal" aria-hidden="true" role="dialog" aria-labelledby="legalModalTitle">
+        <div class="legal-backdrop" id="legalBackdrop"></div>
+        <div class="legal-modal-content">
+            <div class="legal-modal-header">
+                <h3 id="legalModalTitle">Kurumsal Yasal Bilgilendirme &amp; Politikalar</h3>
+                <button type="button" class="legal-modal-close" id="legalModalClose" aria-label="Kapat">&times;</button>
+            </div>
+
+            <div class="legal-tabs" role="tablist" aria-label="Yasal Metin Sekmeleri">
+                <button type="button" class="legal-tab-btn active" data-legal-tab="kvkk" role="tab" aria-selected="true">KVKK Aydınlatma Metni</button>
+                <button type="button" class="legal-tab-btn" data-legal-tab="gizlilik" role="tab" aria-selected="false">Gizlilik Politikası</button>
+                <button type="button" class="legal-tab-btn" data-legal-tab="cerez" role="tab" aria-selected="false">Çerez Politikası &amp; Ayarlar</button>
+                <button type="button" class="legal-tab-btn" data-legal-tab="kullanim" role="tab" aria-selected="false">Kullanım Koşulları &amp; Yasal Uyarı</button>
+            </div>
+
+            <div class="legal-modal-body">
+                <!-- Sekme 1: KVKK Aydınlatma Metni -->
+                <div class="legal-tab-panel active" id="legal-panel-kvkk" role="tabpanel">
+                    <h4>6698 Sayılı Kişisel Verilerin Korunması Kanunu (KVKK) Aydınlatma Metni</h4>
+                    <p><strong>1. Veri Sorumlusunun Kimliği:</strong><br>
+                    6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca, kişisel verileriniz; veri sorumlusu sıfatıyla Düzce Merkez adresinde faaliyet gösteren <strong>Mutlu PVC ve Alüminyum</strong> (İletişim: <a href="tel:+905071908181">0507 190 81 81</a>, Web: <code>https://mutlupvcaluminyum.com</code>) tarafından aşağıda açıklanan kapsamda hukuka ve dürüstlük kurallarına uygun olarak işlenmektedir.</p>
+
+                    <p><strong>2. İşlenen Kişisel Veriler ve İşleme Amaçları:</strong><br>
+                    İnternet sitemizde yer alan <em>Ölçü ve Teklif Hesaplama Formu</em>, <em>Geri Bildirim Formu</em>, telefon veya WhatsApp iletişim kanallarımız aracılığıyla kendi rızanızla paylaştığınız; Ad-Soyad, Telefon Numarası, İlçe/Bölge bilgisi, talep ettiğiniz hizmet ve yaklaşık ölçü bilgileriniz şu amaçlarla işlenmektedir:</p>
+                    <ul>
+                        <li>Cam balkon, kış bahçesi, PVC doğrama, alüminyum doğrama, korkuluk ve sineklik hizmetlerimiz için ön fiyat teklifi oluşturulması ve ücretsiz yerinde keşif organizasyonunun yapılması,</li>
+                        <li>Müşteri memnuniyeti, geri bildirim, öneri ve satış sonrası teknik destek/servis taleplerinizin sonuçlandırılması,</li>
+                        <li>6502 sayılı Tüketicinin Korunması Hakkında Kanun ve ilgili mevzuat kapsamındaki yükümlülüklerin yerine getirilmesi.</li>
+                    </ul>
+
+                    <p><strong>3. Kişisel Verilerin Aktarılması:</strong><br>
+                    Web sitemiz üzerindeki formlar doğrudan cihazınızdaki <strong>WhatsApp</strong> uygulamasını tetikleyerek mesaj gönderimi esasına göre çalışmaktadır. Kişisel verileriniz üçüncü kişi reklam firmalarına satılmaz veya pazarlama amacıyla paylaşılmaz; yalnızca yasal zorunluluk halinde yetkili kamu kurum ve kuruluşlarıyla paylaşılabilir.</p>
+
+                    <p><strong>4. Kişisel Veri Toplamanın Yöntemi ve Hukuki Sebebi:</strong><br>
+                    Verileriniz, web sitemizdeki elektronik formlar ve iletişim butonları aracılığıyla KVKK’nın 5. maddesinde belirtilen <em>“bir sözleşmenin kurulması veya ifasıyla doğrudan doğruya ilgili olması”</em>, <em>“veri sorumlusunun hukuki yükümlülüğünü yerine getirebilmesi”</em> ve açık rızanız hukuki sebeplerine dayanılarak toplanmaktadır.</p>
+
+                    <p><strong>5. KVKK Madde 11 Kapsamındaki Haklarınız:</strong><br>
+                    Kişisel veri sahibi olarak KVKK’nın 11. maddesi uyarınca; verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, amacına uygun kullanılıp kullanılmadığını öğrenme, eksik veya yanlış işlenmişse düzeltilmesini ve silinmesini talep etme haklarına sahipsiniz. Taleplerinizi <strong>0507 190 81 81</strong> numaralı iletişim hattımız üzerinden bize iletebilirsiniz.</p>
+                </div>
+
+                <!-- Sekme 2: Gizlilik Politikası -->
+                <div class="legal-tab-panel" id="legal-panel-gizlilik" role="tabpanel">
+                    <h4>Gizlilik ve Güvenlik Politikası</h4>
+                    <p><strong>Mutlu PVC ve Alüminyum</strong> olarak ziyaretçilerimizin gizliliğine ve veri güvenliğine en üst düzeyde önem veriyoruz.</p>
+                    <ul>
+                        <li><strong>SSL Güvenliği:</strong> Web sitemiz (<code>https://mutlupvcaluminyum.com</code>) 256-bit SSL güvenlik sertifikası ile korunmakta olup tüm bağlantılar şifreli olarak gerçekleştirilir.</li>
+                        <li><strong>Sunucu Kayıtları:</strong> Sitemizde girdiğiniz yaklaşık ölçü ve geri bildirim bilgileri herhangi bir dış veritabanında gizlice depolanmaz; doğrudan sizin onayınızla WhatsApp mesaj şablonu olarak oluşturulur.</li>
+                        <li><strong>Üçüncü Taraf Bağlantılar:</strong> Sitemizde resmi Instagram hesabımız (<code>@mutlupvcaluminyum</code>) ve WhatsApp iletişim hattımıza yönlendiren bağlantılar bulunmaktadır. Bu platformların kendi gizlilik ve veri politikaları geçerlidir.</li>
+                    </ul>
+                </div>
+
+                <!-- Sekme 3: Çerez (Cookie) Politikası ve Tercih Yönetimi -->
+                <div class="legal-tab-panel" id="legal-panel-cerez" role="tabpanel">
+                    <h4>Çerez (Cookie) Politikası ve Tercih Yönetimi</h4>
+                    <p>İnternet sitemizde ziyaretçi deneyimini iyileştirmek, mobil cihaz uyumluluğunu sağlamak ve çerez tercihlerinizi hatırlamak amacıyla çerezler (cookies) ve yerel depolama (localStorage) teknolojileri kullanılmaktadır.</p>
+
+                    <div class="cookie-prefs-list">
+                        <div class="cookie-pref-item">
+                            <div class="cookie-pref-info">
+                                <strong>Zorunlu Teknik Çerezler</strong>
+                                <p>Sitenin güvenli çalışması, mobil menü/form işlevleri ve çerez onay tercihinizin hatırlanması için zorunludur. Kapatılamaz.</p>
+                            </div>
+                            <span class="cookie-badge-mandatory">Her Zaman Aktif</span>
+                        </div>
+
+                        <div class="cookie-pref-item">
+                            <div class="cookie-pref-info">
+                                <strong>İşlevsel ve Kullanıcı Deneyimi Çerezleri</strong>
+                                <p>Ölçü birimi (cm/metre) seçiminiz ve form kolaylaştırıcı tercihlerinizin hatırlanmasını sağlar.</p>
+                            </div>
+                            <label class="cookie-switch">
+                                <input type="checkbox" id="cookiePrefFunctional" checked>
+                                <span class="cookie-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="cookie-pref-item">
+                            <div class="cookie-pref-info">
+                                <strong>Performans ve Arama Motoru Analitik Çerezleri</strong>
+                                <p>Sayfa yüklenme hızını ve ziyaretçi trafiğini anonim olarak ölçümleyerek sitemizi geliştirmemize yardımcı olur.</p>
+                            </div>
+                            <label class="cookie-switch">
+                                <input type="checkbox" id="cookiePrefAnalytics" checked>
+                                <span class="cookie-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="cookie-prefs-actions">
+                        <button type="button" class="btn btn-primary btn-sm" id="saveCookiePrefsBtn">Seçili Tercihleri Kaydet</button>
+                        <button type="button" class="btn btn-outline-dark btn-sm" id="acceptAllCookiesModalBtn">Tümünü Kabul Et</button>
+                    </div>
+                </div>
+
+                <!-- Sekme 4: Kullanım Koşulları & Yasal Uyarı -->
+                <div class="legal-tab-panel" id="legal-panel-kullanim" role="tabpanel">
+                    <h4>Kullanım Koşulları, Ön Keşif Bilgilendirmesi ve Yasal Uyarı</h4>
+                    <p><strong>1. Ön Keşif ve Fiyat Teklifi Bilgilendirmesi (Yasal Şerh):</strong><br>
+                    Bu web sitesinde yer alan <em>Ölçü ve Teklif Hesaplama</em> aracı, ziyaretçilerin yaklaşık metrekare ($\text{m}^2$) hesabı yapabilmesi ve ön fiyat bilgisi talep edebilmesi amacıyla sunulmuş bir <strong>ön bilgilendirme</strong> aracıdır. İnternet sitesi üzerinden iletilen ölçüler bağlayıcı sözleşme veya kesin satış icabı niteliği taşımaz. Nihai fiyatlandırma ve teknik şartname, <strong>Mutlu PVC ve Alüminyum</strong> uzman ekibinin uygulama adresinde yapacağı <strong>ücretsiz yerinde milimetrik ölçü ve teknik keşif</strong> sonrasında kesinleşir.</p>
+
+                    <p><strong>2. Fikri Mülkiyet ve Görsel Telif Hakları:</strong><br>
+                    <code>mutlupvcaluminyum.com</code> alan adlı web sitesinde yer alan tüm proje fotoğrafları, şantiye uygulama videoları, firma logosu, metinler ve tasarım unsurları <strong>Mutlu PVC ve Alüminyum</strong>'a aittir. 5846 sayılı Fikir ve Sanat Eserleri Kanunu uyarınca yazılı izin alınmaksızın kopyalanması, başka sitelerde veya sosyal medya hesaplarında ticari amaçla kullanılması yasaktır.</p>
+
+                    <p><strong>3. Tüketici Hukuku ve Uyuşmazlık Çözümü:</strong><br>
+                    Firmamız tarafından gerçekleştirilen tüm üretim ve montaj uygulamalarında 6502 sayılı Tüketicinin Korunması Hakkında Kanun hükümleri geçerlidir. Olası uyuşmazlıklarda Düzce Tüketici Hakem Heyetleri ve Düzce Mahkemeleri yetkilidir.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Çerez (Cookie) Onay Çubuğu -->
+    <aside class="cookie-banner" id="cookieBanner" role="region" aria-label="Çerez Kullanımı ve Gizlilik Bildirimi" hidden>
+        <div class="cookie-banner-inner">
+            <div class="cookie-banner-text">
+                <strong>🍪 Çerez ve KVKK Bilgilendirmesi</strong>
+                <p>
+                    Size telefonda ve bilgisayarda en iyi deneyimi sunmak ve site performansını artırmak için çerezler kullanıyoruz. Detaylar için <button type="button" class="legal-inline-link" data-open-legal="cerez">Çerez Politikası</button> ve <button type="button" class="legal-inline-link" data-open-legal="kvkk">KVKK Aydınlatma Metni</button>'ni inceleyebilirsiniz.
+                </p>
+            </div>
+            <div class="cookie-banner-actions">
+                <button type="button" class="btn btn-outline-light btn-sm" id="cookieNecessaryBtn">Sadece Zorunlu</button>
+                <button type="button" class="btn btn-outline-light btn-sm" data-open-legal="cerez">Ayarlar</button>
+                <button type="button" class="btn btn-primary btn-sm" id="cookieAcceptAllBtn">Tümünü Kabul Et</button>
+            </div>
+        </div>
+    </aside>
 
     <!-- Lightbox Modal (Fotoğraf Galerisi & Video Oynatıcı) -->
     <div class="lightbox-modal" id="lightboxModal" aria-hidden="true" role="dialog" aria-label="Proje Medya Görüntüleyici">

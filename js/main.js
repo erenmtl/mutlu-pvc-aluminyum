@@ -349,4 +349,252 @@ document.addEventListener('DOMContentLoaded', () => {
     if (yearSpan) {
         yearSpan.textContent = String(new Date().getFullYear());
     }
+
+    // 6. Müşteri Geri Bildirim ve Yıldız Değerlendirme Sistemi
+    const starBtns = document.querySelectorAll('#starSelector .star-btn');
+    const feedbackRatingInput = document.getElementById('feedbackRating');
+    const starRatingLabel = document.getElementById('starRatingLabel');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackSuccessMsg = document.getElementById('feedbackSuccessMsg');
+    const reviewsGrid = document.getElementById('reviewsGrid');
+
+    const ratingDescriptions = {
+        1: '1 / 5 - Geliştirilmeli',
+        2: '2 / 5 - Orta',
+        3: '3 / 5 - İyi',
+        4: '4 / 5 - Memnunum',
+        5: '5 / 5 - Çok Memnunum'
+    };
+
+    starBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const rating = parseInt(btn.getAttribute('data-rating') || '5', 10);
+            if (feedbackRatingInput) feedbackRatingInput.value = String(rating);
+            if (starRatingLabel) starRatingLabel.textContent = ratingDescriptions[rating] || '5 / 5';
+
+            starBtns.forEach(b => {
+                const bVal = parseInt(b.getAttribute('data-rating') || '0', 10);
+                b.classList.toggle('active', bVal <= rating);
+            });
+        });
+    });
+
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = (document.getElementById('feedbackName')?.value || '').trim();
+            const category = document.getElementById('feedbackCategory')?.value || 'Müşteri Memnuniyeti';
+            const service = document.getElementById('feedbackService')?.value || '';
+            const region = (document.getElementById('feedbackRegion')?.value || 'Düzce').trim() || 'Düzce';
+            const message = (document.getElementById('feedbackMessage')?.value || '').trim();
+            const rating = parseInt(feedbackRatingInput?.value || '5', 10);
+            const starsVisual = '★'.repeat(rating) + '☆'.repeat(Math.max(0, 5 - rating));
+
+            if (!name || !message) return;
+
+            // Ekrandaki yorum listesine anında ekle (kullanıcı deneyimi için)
+            if (reviewsGrid && rating >= 4) {
+                const initials = name
+                    .split(' ')
+                    .filter(Boolean)
+                    .slice(0, 2)
+                    .map(part => part[0].toUpperCase() + '.')
+                    .join('');
+
+                const newCard = document.createElement('article');
+                newCard.className = 'review-card';
+                newCard.innerHTML = `
+                    <div class="review-card-top">
+                        <div class="review-author">
+                            <span class="author-avatar">${initials || 'M.M.'}</span>
+                            <div>
+                                <h4></h4>
+                                <span></span>
+                            </div>
+                        </div>
+                        <span class="review-stars" aria-label="${rating} Yıldız">${'★'.repeat(rating)}</span>
+                    </div>
+                    <p class="review-text"></p>
+                    <span class="review-badge">Yeni Geri Bildirim • ${service}</span>
+                `;
+                const h4El = newCard.querySelector('h4');
+                const spanEl = newCard.querySelector('.review-author span');
+                const pEl = newCard.querySelector('.review-text');
+                if (h4El) h4El.textContent = name;
+                if (spanEl) spanEl.textContent = `${region} • ${service}`;
+                if (pEl) pEl.textContent = `"${message}"`;
+                reviewsGrid.prepend(newCard);
+            }
+
+            if (feedbackSuccessMsg) {
+                feedbackSuccessMsg.hidden = false;
+            }
+
+            const waLines = [
+                'Merhaba *Mutlu PVC ve Alüminyum*, web siteniz üzerinden geri bildirim / değerlendirme gönderiyorum:',
+                '',
+                `• *Ad Soyad:* ${name}`,
+                `• *Konu:* ${category}`,
+                `• *Memnuniyet Puanı:* ${starsVisual} (${rating}/5)`,
+                `• *İlgili Hizmet:* ${service}`,
+                `• *Bölge:* ${region}`,
+                `• *Mesaj:* ${message}`
+            ];
+
+            const waUrl = `https://wa.me/905071908181?text=${encodeURIComponent(waLines.join('\n'))}`;
+            window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+            feedbackForm.reset();
+            if (feedbackRatingInput) feedbackRatingInput.value = '5';
+            if (starRatingLabel) starRatingLabel.textContent = ratingDescriptions[5];
+            starBtns.forEach(b => b.classList.add('active'));
+        });
+    }
+
+    // 7. Yasal Metinler Modalı (KVKK, Gizlilik, Çerez Politikası, Kullanım Koşulları)
+    const legalModal = document.getElementById('legalModal');
+    const legalBackdrop = document.getElementById('legalBackdrop');
+    const legalModalClose = document.getElementById('legalModalClose');
+    const legalTabBtns = document.querySelectorAll('.legal-tab-btn');
+    const legalTabPanels = document.querySelectorAll('.legal-tab-panel');
+    const openLegalTriggers = document.querySelectorAll('[data-open-legal]');
+
+    function switchLegalTab(tabKey) {
+        legalTabBtns.forEach(btn => {
+            const isMatch = btn.getAttribute('data-legal-tab') === tabKey;
+            btn.classList.toggle('active', isMatch);
+            btn.setAttribute('aria-selected', String(isMatch));
+        });
+
+        legalTabPanels.forEach(panel => {
+            const isMatch = panel.id === `legal-panel-${tabKey}`;
+            panel.classList.toggle('active', isMatch);
+        });
+    }
+
+    function openLegalModal(tabKey) {
+        if (!legalModal) return;
+        switchLegalTab(tabKey || 'kvkk');
+        legalModal.classList.add('open');
+        legalModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLegalModal() {
+        if (!legalModal) return;
+        legalModal.classList.remove('open');
+        legalModal.setAttribute('aria-hidden', 'true');
+    }
+
+    openLegalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetTab = trigger.getAttribute('data-open-legal') || 'kvkk';
+            openLegalModal(targetTab);
+        });
+    });
+
+    legalTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabKey = btn.getAttribute('data-legal-tab');
+            if (tabKey) switchLegalTab(tabKey);
+        });
+    });
+
+    if (legalModalClose) legalModalClose.addEventListener('click', closeLegalModal);
+    if (legalBackdrop) legalBackdrop.addEventListener('click', closeLegalModal);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && legalModal && legalModal.classList.contains('open')) {
+            closeLegalModal();
+        }
+    });
+
+    // 8. Çerez (Cookie) Onay ve Tercih Yönetimi
+    const COOKIE_STORAGE_KEY = 'mutlu_pvc_cookie_consent_v1';
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAcceptAllBtn = document.getElementById('cookieAcceptAllBtn');
+    const cookieNecessaryBtn = document.getElementById('cookieNecessaryBtn');
+    const saveCookiePrefsBtn = document.getElementById('saveCookiePrefsBtn');
+    const acceptAllCookiesModalBtn = document.getElementById('acceptAllCookiesModalBtn');
+    const openCookieSettingsBtn = document.getElementById('openCookieSettingsBtn');
+    const cookiePrefFunctional = document.getElementById('cookiePrefFunctional');
+    const cookiePrefAnalytics = document.getElementById('cookiePrefAnalytics');
+
+    function saveCookieConsent(preferences) {
+        const payload = {
+            necessary: true,
+            functional: Boolean(preferences.functional),
+            analytics: Boolean(preferences.analytics),
+            updatedAt: new Date().toISOString()
+        };
+        try {
+            localStorage.setItem(COOKIE_STORAGE_KEY, JSON.stringify(payload));
+        } catch (_) {
+            // Özel tarama modunda localStorage kapalıysa sessizce devam et
+        }
+        if (cookieBanner) {
+            cookieBanner.hidden = true;
+        }
+        closeLegalModal();
+    }
+
+    function loadCookieConsent() {
+        try {
+            const raw = localStorage.getItem(COOKIE_STORAGE_KEY);
+            if (!raw) return null;
+            return JSON.parse(raw);
+        } catch (_) {
+            return null;
+        }
+    }
+
+    const existingConsent = loadCookieConsent();
+    if (!existingConsent) {
+        setTimeout(() => {
+            if (cookieBanner) cookieBanner.hidden = false;
+        }, 500);
+    } else {
+        if (cookiePrefFunctional) cookiePrefFunctional.checked = Boolean(existingConsent.functional);
+        if (cookiePrefAnalytics) cookiePrefAnalytics.checked = Boolean(existingConsent.analytics);
+    }
+
+    if (cookieAcceptAllBtn) {
+        cookieAcceptAllBtn.addEventListener('click', () => {
+            if (cookiePrefFunctional) cookiePrefFunctional.checked = true;
+            if (cookiePrefAnalytics) cookiePrefAnalytics.checked = true;
+            saveCookieConsent({ functional: true, analytics: true });
+        });
+    }
+
+    if (acceptAllCookiesModalBtn) {
+        acceptAllCookiesModalBtn.addEventListener('click', () => {
+            if (cookiePrefFunctional) cookiePrefFunctional.checked = true;
+            if (cookiePrefAnalytics) cookiePrefAnalytics.checked = true;
+            saveCookieConsent({ functional: true, analytics: true });
+        });
+    }
+
+    if (cookieNecessaryBtn) {
+        cookieNecessaryBtn.addEventListener('click', () => {
+            if (cookiePrefFunctional) cookiePrefFunctional.checked = false;
+            if (cookiePrefAnalytics) cookiePrefAnalytics.checked = false;
+            saveCookieConsent({ functional: false, analytics: false });
+        });
+    }
+
+    if (saveCookiePrefsBtn) {
+        saveCookiePrefsBtn.addEventListener('click', () => {
+            saveCookieConsent({
+                functional: cookiePrefFunctional ? cookiePrefFunctional.checked : true,
+                analytics: cookiePrefAnalytics ? cookiePrefAnalytics.checked : false
+            });
+        });
+    }
+
+    if (openCookieSettingsBtn) {
+        openCookieSettingsBtn.addEventListener('click', () => {
+            openLegalModal('cerez');
+        });
+    }
 });
