@@ -757,4 +757,388 @@ document.addEventListener('DOMContentLoaded', () => {
             openLegalModal('cerez');
         });
     }
+
+    // 9. Bireysel / Müteahhit (B2B) Teklif Sekmeleri & B2B Form Gönderimi
+    const quoteModeTabs = document.querySelectorAll('.quote-mode-tab');
+    const b2bQuoteForm = document.getElementById('b2bQuoteForm');
+    const b2bWebsiteHp = document.getElementById('b2bWebsiteHp');
+    const b2bSubmitBtn = document.getElementById('b2bSubmitBtn');
+
+    function switchQuoteModeTab(mode) {
+        quoteModeTabs.forEach(tab => {
+            const isMatch = tab.getAttribute('data-quote-tab') === mode;
+            tab.classList.toggle('active', isMatch);
+            tab.setAttribute('aria-selected', String(isMatch));
+        });
+
+        if (quoteForm && b2bQuoteForm) {
+            if (mode === 'b2b') {
+                quoteForm.hidden = true;
+                b2bQuoteForm.hidden = false;
+            } else {
+                quoteForm.hidden = false;
+                b2bQuoteForm.hidden = true;
+            }
+        }
+    }
+
+    quoteModeTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const mode = tab.getAttribute('data-quote-tab') || 'individual';
+            switchQuoteModeTab(mode);
+        });
+    });
+
+    if (b2bQuoteForm) {
+        b2bQuoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Honeypot Bot Kontrolü
+            if (b2bWebsiteHp && b2bWebsiteHp.value.trim() !== '') {
+                return;
+            }
+
+            // 5 Saniye Rate-Limit / Cooldown Kontrolü
+            const submitButton = b2bSubmitBtn || b2bQuoteForm.querySelector('button[type="submit"]');
+            if (submitButton && activeCooldowns.get(submitButton)) {
+                return;
+            }
+
+            const companyName = sanitizeText(document.getElementById('b2bCompanyName')?.value || '', 80);
+            const projectLocation = sanitizeText(document.getElementById('b2bLocation')?.value || '', 80);
+            const projectScope = sanitizeText(document.getElementById('b2bProjectScope')?.value || '', 120);
+            const extraNote = sanitizeText(document.getElementById('b2bExtraNote')?.value || '', 200);
+
+            const checkedItems = Array.from(b2bQuoteForm.querySelectorAll('input[name="b2bItem"]:checked'))
+                .map(cb => sanitizeText(cb.value, 60))
+                .filter(Boolean);
+
+            if (!companyName || !projectLocation || !projectScope) {
+                return;
+            }
+
+            const itemsSummary = checkedItems.length > 0
+                ? checkedItems.join(', ')
+                : 'Belirtilmedi (Keşifte netleştirilecek)';
+
+            const b2bLines = [
+                'Merhaba *Mutlu PVC ve Alüminyum*, kurumsal *Müteahhit / Toplu Proje (B2B)* kapsamında şantiye fiyat teklifi almak istiyoruz:',
+                '',
+                `• *Firma / Yetkili:* ${companyName}`,
+                `• *Proje Bölgesi:* ${projectLocation}`,
+                `• *Proje Kapsamı:* ${projectScope}`,
+                `• *İstenen Kalemler:* ${itemsSummary}`
+            ];
+
+            if (extraNote) {
+                b2bLines.push(`• *Proje Notu / Takvim:* ${extraNote}`);
+            }
+
+            b2bLines.push(
+                '',
+                'Mimari projemizi ve keşif listemizi WhatsApp üzerinden paylaşmak istiyoruz.'
+            );
+
+            const waUrl = `https://wa.me/905071908181?text=${encodeURIComponent(b2bLines.join('\n'))}`;
+
+            if (submitButton) {
+                applyButtonCooldown(submitButton, 5);
+            }
+
+            window.open(waUrl, '_blank', 'noopener,noreferrer');
+        });
+    }
+
+    // 10. İnteraktif Cam ve Profil Renk Kartelası (Görsel Önizlemeli Simülatör)
+    const profileSwatches = document.querySelectorAll('#profileSwatches .swatch-btn');
+    const glassSwatches = document.querySelectorAll('#glassSwatches .glass-btn');
+    const previewStage = document.getElementById('previewStage');
+    const previewProfileBadge = document.getElementById('previewProfileBadge');
+    const previewGlassBadge = document.getElementById('previewGlassBadge');
+    const previewComboTitle = document.getElementById('previewComboTitle');
+    const previewFacadeText = document.getElementById('previewFacadeText');
+    const previewAdvantageText = document.getElementById('previewAdvantageText');
+    const metricThermalVal = document.getElementById('metricThermalVal');
+    const metricThermalBar = document.getElementById('metricThermalBar');
+    const metricSolarVal = document.getElementById('metricSolarVal');
+    const metricSolarBar = document.getElementById('metricSolarBar');
+    const metricPrivacyVal = document.getElementById('metricPrivacyVal');
+    const metricPrivacyBar = document.getElementById('metricPrivacyBar');
+    const applyComboToQuoteBtn = document.getElementById('applyComboToQuoteBtn');
+
+    const profileCatalog = {
+        'antrasit': {
+            name: 'Antrasit Gri Profil',
+            short: 'Antrasit Gri',
+            note: 'Modern rezidans, yeni nesil konut ve kış bahçesi cephelerine tam uyum sağlar, leke ve tozu belli etmez.'
+        },
+        'altin-mese': {
+            name: 'Altın Meşe (Ahşap Desen) Profil',
+            short: 'Altın Meşe / Ahşap Desen',
+            note: 'Villa, bahçe katı, teras ve doğayla iç içe müstakil projelerde sıcak ahşap estetiği sunar.'
+        },
+        'beyaz': {
+            name: 'Klasik Beyaz Profil',
+            short: 'Klasik Beyaz',
+            note: 'Aydınlık, ferah ve mevcut PVC doğramalarla %100 bütünlük sağlayan zamansız görünüm sunar.'
+        },
+        'bronz': {
+            name: 'Bronz / Eloksal Profil',
+            short: 'Bronz / Eloksal',
+            note: 'Prestijli dış cephelerde, kafe/restoran ve sıcak tonlu bina kaplamalarında korozyona tam direnç sağlar.'
+        },
+        'siyah': {
+            name: 'Mat Siyah Minimal Profil',
+            short: 'Mat Siyah',
+            note: 'Ticari dükkan vitrinleri, loft daireler ve modern kış bahçelerinde keskin mimari çerçeve etkisi yaratır.'
+        }
+    };
+
+    const glassCatalog = {
+        'fume': {
+            name: '8mm Füme Temperli Cam',
+            short: '8mm Füme Temperli',
+            facade: 'Güney ve Batı cepheli, yoğun güneş alan balkonlar ve kış bahçesi tavan/cepheleri için önerilir.',
+            advantage: 'Güneşin yakıcı UV etkisini ve parlamayı kırar, gündüz saatlerinde dışarıdan içerinin görünmesini azaltarak mahremiyet sağlar.',
+            thermalLabel: '%88 Yüksek',
+            thermalPct: 88,
+            solarLabel: '%85 Güneş Kırıcı',
+            solarPct: 85,
+            privacyLabel: '%80 Gündüz Mahremiyeti',
+            privacyPct: 80
+        },
+        'seffaf': {
+            name: '8mm / 10mm Şeffaf Temperli Cam',
+            short: '8mm/10mm Şeffaf Temperli',
+            facade: 'Kuzey ve Doğu cepheli balkonlar, manzaralı teraslar ve gün ışığından maksimum faydalanmak isteyen daireler için önerilir.',
+            advantage: 'Panoramik manzarayı hiç kesmez, doğal gün ışığını %95 oranında içeri alır ve darbe dayanımı yüksek temperli güvenlik sunar.',
+            thermalLabel: '%82 Standart+',
+            thermalPct: 82,
+            solarLabel: '%45 Doğal Işık Odaklı',
+            solarPct: 45,
+            privacyLabel: '%40 Tam Şeffaf',
+            privacyPct: 40
+        },
+        'bronz': {
+            name: '8mm Bronz Temperli Cam',
+            short: '8mm Bronz Temperli',
+            facade: 'Güney, Doğu ve Batı cephelerde sıcak, loş ve dinlendirici bir balkon atmosferi arayan konut ve villalar için önerilir.',
+            advantage: 'Göz yoran parlak ışığı yumuşak kehribar-bronz tonuyla filtreler; özellikle ahşap desen, bronz ve antrasit profillerle üst düzey uyum yakalar.',
+            thermalLabel: '%86 Yüksek',
+            thermalPct: 86,
+            solarLabel: '%80 UV & Parlama Kontrolü',
+            solarPct: 80,
+            privacyLabel: '%75 Dengeli Mahremiyet',
+            privacyPct: 75
+        },
+        'reflekte': {
+            name: 'Reflekte (Aynalı) Temperli Cam',
+            short: 'Reflekte / Aynalı Cam',
+            facade: 'Cadde üzeri giriş/ara kat daireler, komşu binalara yakın balkonlar ve yoğun güneş alan ticari cepheler için önerilir.',
+            advantage: 'Dış yüzeyi ayna efekti vererek gündüz dışarıdan içerinin görünmesini maksimum düzeyde engeller ve güneş ısısını geri yansıtır.',
+            thermalLabel: '%90 Çok Yüksek',
+            thermalPct: 90,
+            solarLabel: '%92 Maksimum Güneş Kalkanı',
+            solarPct: 92,
+            privacyLabel: '%95 Maksimum Mahremiyet',
+            privacyPct: 95
+        },
+        'isicam': {
+            name: 'Isıcam Konfor (Çift Camlı 4+16+4 Sistem)',
+            short: 'Isıcam Konfor (Çift Cam)',
+            facade: 'Balkonunu evin bir odasına katmak isteyen tüm cepheler (Kuzey/Güney), kış bahçeleri ve yüksek ses/ısı yalıtımı arayan projeler için önerilir.',
+            advantage: 'Tek cama göre ısı kaybını %50’ye varan oranda azaltır; kışın sıcak, yazın serin tutar, terleme/buğulanmayı ve dış gürültüyü minimuma indirir.',
+            thermalLabel: '%98 Maksimum (Dört Mevsim Oda)',
+            thermalPct: 98,
+            solarLabel: '%88 Konfor Cam Kontrolü',
+            solarPct: 88,
+            privacyLabel: '%70 Çift Cam Yansıma',
+            privacyPct: 70
+        }
+    };
+
+    let selectedProfileKey = 'antrasit';
+    let selectedGlassKey = 'fume';
+
+    function updateConfiguratorPreview() {
+        const pInfo = profileCatalog[selectedProfileKey] || profileCatalog['antrasit'];
+        const gInfo = glassCatalog[selectedGlassKey] || glassCatalog['fume'];
+
+        if (previewStage) {
+            previewStage.setAttribute('data-profile-theme', selectedProfileKey);
+            previewStage.setAttribute('data-glass-theme', selectedGlassKey);
+        }
+
+        if (previewProfileBadge) previewProfileBadge.textContent = `Profil: ${pInfo.short}`;
+        if (previewGlassBadge) previewGlassBadge.textContent = `Cam: ${gInfo.short}`;
+        if (previewComboTitle) previewComboTitle.textContent = `${pInfo.name} + ${gInfo.name}`;
+        if (previewFacadeText) {
+            previewFacadeText.textContent = `${gInfo.facade} ${pInfo.note}`;
+        }
+        if (previewAdvantageText) {
+            previewAdvantageText.textContent = gInfo.advantage;
+        }
+
+        if (metricThermalVal) metricThermalVal.textContent = gInfo.thermalLabel;
+        if (metricThermalBar) metricThermalBar.style.width = `${gInfo.thermalPct}%`;
+
+        if (metricSolarVal) metricSolarVal.textContent = gInfo.solarLabel;
+        if (metricSolarBar) metricSolarBar.style.width = `${gInfo.solarPct}%`;
+
+        if (metricPrivacyVal) metricPrivacyVal.textContent = gInfo.privacyLabel;
+        if (metricPrivacyBar) metricPrivacyBar.style.width = `${gInfo.privacyPct}%`;
+    }
+
+    profileSwatches.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const key = btn.getAttribute('data-profile');
+            if (!key || !profileCatalog[key]) return;
+            selectedProfileKey = key;
+
+            profileSwatches.forEach(b => {
+                const isActive = b === btn;
+                b.classList.toggle('active', isActive);
+                b.setAttribute('aria-checked', String(isActive));
+            });
+
+            updateConfiguratorPreview();
+        });
+    });
+
+    glassSwatches.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const key = btn.getAttribute('data-glass');
+            if (!key || !glassCatalog[key]) return;
+            selectedGlassKey = key;
+
+            glassSwatches.forEach(b => {
+                const isActive = b === btn;
+                b.classList.toggle('active', isActive);
+                b.setAttribute('aria-checked', String(isActive));
+            });
+
+            updateConfiguratorPreview();
+        });
+    });
+
+    if (applyComboToQuoteBtn) {
+        applyComboToQuoteBtn.addEventListener('click', () => {
+            const pInfo = profileCatalog[selectedProfileKey] || profileCatalog['antrasit'];
+            const gInfo = glassCatalog[selectedGlassKey] || glassCatalog['fume'];
+
+            switchQuoteModeTab('individual');
+            if (serviceTypeSelect) {
+                serviceTypeSelect.value = 'Cam Balkon';
+            }
+            if (extraNoteInput) {
+                extraNoteInput.value = `Seçilen Kombinasyon: ${pInfo.short} Profil + ${gInfo.short}`;
+            }
+
+            const quoteSection = document.getElementById('teklif-hesaplama');
+            if (quoteSection) {
+                quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            setTimeout(() => {
+                if (widthInput) widthInput.focus();
+            }, 600);
+        });
+    }
+
+    // 11. "Hangi Cam Balkon Sistemi Size Uygun?" Karşılaştırma Tablosu
+    const compareTabBtns = document.querySelectorAll('#compareMobileTabs .compare-tab-btn');
+    const comparisonTable = document.getElementById('systemComparisonTable');
+    const compareSelectBtns = document.querySelectorAll('.compare-select-btn');
+
+    compareTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const colId = btn.getAttribute('data-compare-col');
+            if (!colId || !comparisonTable) return;
+
+            compareTabBtns.forEach(b => {
+                const isActive = b === btn;
+                b.classList.toggle('active', isActive);
+                b.setAttribute('aria-selected', String(isActive));
+            });
+
+            comparisonTable.querySelectorAll('[data-col]').forEach(cell => {
+                const isMatch = cell.getAttribute('data-col') === colId;
+                cell.classList.toggle('is-active-col', isMatch);
+            });
+        });
+    });
+
+    compareSelectBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetService = btn.getAttribute('data-compare-service') || 'Cam Balkon';
+            const targetNote = btn.getAttribute('data-compare-note') || '';
+
+            switchQuoteModeTab('individual');
+
+            if (serviceTypeSelect) {
+                serviceTypeSelect.value = targetService;
+            }
+            if (extraNoteInput && targetNote) {
+                extraNoteInput.value = targetNote;
+            }
+
+            const quoteSection = document.getElementById('teklif-hesaplama');
+            if (quoteSection) {
+                quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            setTimeout(() => {
+                if (widthInput) widthInput.focus();
+            }, 600);
+        });
+    });
+
+    // 12. "Öncesi / Sonrası" (Before - After) Kaydırmalı Görsel Modülü
+    const baRangeInput = document.getElementById('baRangeInput');
+    const baBeforeLayer = document.getElementById('baBeforeLayer');
+    const baDivider = document.getElementById('baDivider');
+    const baBeforeImg = document.getElementById('baBeforeImg');
+    const baAfterImg = document.getElementById('baAfterImg');
+    const baBeforeLabel = document.getElementById('baBeforeLabel');
+    const baAfterLabel = document.getElementById('baAfterLabel');
+    const baScenarioBtns = document.querySelectorAll('.ba-scenario-btn');
+
+    function updateBeforeAfterSlider(rawValue) {
+        const val = Math.min(100, Math.max(0, Number(rawValue)));
+        if (baBeforeLayer) {
+            baBeforeLayer.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+        }
+        if (baDivider) {
+            baDivider.style.left = `${val}%`;
+        }
+    }
+
+    if (baRangeInput) {
+        baRangeInput.addEventListener('input', (e) => {
+            updateBeforeAfterSlider(e.target.value);
+        });
+        baRangeInput.addEventListener('change', (e) => {
+            updateBeforeAfterSlider(e.target.value);
+        });
+        updateBeforeAfterSlider(baRangeInput.value || 50);
+    }
+
+    baScenarioBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const beforeSrc = btn.getAttribute('data-before-img');
+            const afterSrc = btn.getAttribute('data-after-img');
+            const beforeText = btn.getAttribute('data-before-label');
+            const afterText = btn.getAttribute('data-after-label');
+
+            baScenarioBtns.forEach(b => b.classList.toggle('active', b === btn));
+
+            if (baBeforeImg && beforeSrc) baBeforeImg.setAttribute('src', beforeSrc);
+            if (baAfterImg && afterSrc) baAfterImg.setAttribute('src', afterSrc);
+            if (baBeforeLabel && beforeText) baBeforeLabel.textContent = beforeText;
+            if (baAfterLabel && afterText) baAfterLabel.textContent = afterText;
+
+            if (baRangeInput) {
+                baRangeInput.value = '50';
+                updateBeforeAfterSlider(50);
+            }
+        });
+    });
 });

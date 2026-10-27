@@ -34,7 +34,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css?v=2.4">
+    <link rel="stylesheet" href="css/style.css?v=2.5">
 
     <!-- Schema.org LocalBusiness, OfferCatalog & FAQPage Structured Data for Google SEO -->
     <script type="application/ld+json">
@@ -490,6 +490,339 @@
             </div>
         </section>
 
+        <!-- 1. İNTERAKTİF CAM VE PROFİL RENK KARTELASI (Görsel Önizlemeli) -->
+        <section class="section configurator-section" id="renk-kartelasi">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">İNTERAKTİF KOMBİNASYON SİMÜLATÖRÜ</span>
+                    <h2 class="section-title">Profil &amp; Cam Renk Seçeneklerimiz</h2>
+                    <p class="section-desc">
+                        Balkonunuzun veya pencerenizin cephesine en uygun <strong>alüminyum/PVC profil rengini</strong> ve <strong>temperli cam rengini</strong> seçin; kombinasyonun görünümünü, hangi cepheler için önerildiğini ve yalıtım avantajlarını anında inceleyin.
+                    </p>
+                </div>
+
+                <div class="configurator-grid">
+                    <!-- Sol Sütun: Renk ve Cam Seçiciler -->
+                    <div class="configurator-controls-card">
+                        <div class="config-group">
+                            <div class="config-group-header">
+                                <span class="config-step-badge">1. Adım</span>
+                                <h3>Profil Rengi Seçiniz</h3>
+                            </div>
+                            <div class="swatch-grid" id="profileSwatches" role="radiogroup" aria-label="Profil Renk Seçenekleri">
+                                <button type="button" class="swatch-btn active" data-profile="antrasit" aria-checked="true" role="radio">
+                                    <span class="swatch-circle swatch-antrasit"></span>
+                                    <span class="swatch-name">Antrasit Gri</span>
+                                    <span class="swatch-sub">Modern &amp; Popüler</span>
+                                </button>
+                                <button type="button" class="swatch-btn" data-profile="altin-mese" aria-checked="false" role="radio">
+                                    <span class="swatch-circle swatch-altin-mese"></span>
+                                    <span class="swatch-name">Altın Meşe</span>
+                                    <span class="swatch-sub">Ahşap Desen</span>
+                                </button>
+                                <button type="button" class="swatch-btn" data-profile="beyaz" aria-checked="false" role="radio">
+                                    <span class="swatch-circle swatch-beyaz"></span>
+                                    <span class="swatch-name">Klasik Beyaz</span>
+                                    <span class="swatch-sub">Ferah &amp; Zamansız</span>
+                                </button>
+                                <button type="button" class="swatch-btn" data-profile="bronz" aria-checked="false" role="radio">
+                                    <span class="swatch-circle swatch-bronz"></span>
+                                    <span class="swatch-name">Bronz / Eloksal</span>
+                                    <span class="swatch-sub">Prestijli Cephe</span>
+                                </button>
+                                <button type="button" class="swatch-btn" data-profile="siyah" aria-checked="false" role="radio">
+                                    <span class="swatch-circle swatch-siyah"></span>
+                                    <span class="swatch-name">Mat Siyah</span>
+                                    <span class="swatch-sub">Loft &amp; Ticari</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="config-group">
+                            <div class="config-group-header">
+                                <span class="config-step-badge">2. Adım</span>
+                                <h3>Cam Tipi ve Rengi Seçiniz</h3>
+                            </div>
+                            <div class="glass-options-grid" id="glassSwatches" role="radiogroup" aria-label="Cam Seçenekleri">
+                                <button type="button" class="glass-btn active" data-glass="fume" aria-checked="true" role="radio">
+                                    <span class="glass-chip glass-chip-fume"></span>
+                                    <div>
+                                        <strong>Füme Temperli Cam</strong>
+                                        <span>8mm / 10mm Güneş Kontrollü</span>
+                                    </div>
+                                </button>
+                                <button type="button" class="glass-btn" data-glass="seffaf" aria-checked="false" role="radio">
+                                    <span class="glass-chip glass-chip-seffaf"></span>
+                                    <div>
+                                        <strong>8mm/10mm Şeffaf Temperli</strong>
+                                        <span>Maksimum Gün Işığı</span>
+                                    </div>
+                                </button>
+                                <button type="button" class="glass-btn" data-glass="bronz" aria-checked="false" role="radio">
+                                    <span class="glass-chip glass-chip-bronz"></span>
+                                    <div>
+                                        <strong>Bronz Temperli Cam</strong>
+                                        <span>Sıcak Ton &amp; UV Koruması</span>
+                                    </div>
+                                </button>
+                                <button type="button" class="glass-btn" data-glass="reflekte" aria-checked="false" role="radio">
+                                    <span class="glass-chip glass-chip-reflekte"></span>
+                                    <div>
+                                        <strong>Reflekte / Aynalı Cam</strong>
+                                        <span>Tam Mahremiyet &amp; Yansıtıcı</span>
+                                    </div>
+                                </button>
+                                <button type="button" class="glass-btn" data-glass="isicam" aria-checked="false" role="radio">
+                                    <span class="glass-chip glass-chip-isicam"></span>
+                                    <div>
+                                        <strong>Isıcam Konfor (Çift Cam)</strong>
+                                        <span>Dört Mevsim Oda Sıcaklığı</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sağ Sütun: Canlı Görsel Önizleme & Cephe/Yalıtım Analizi -->
+                    <div class="configurator-preview-card">
+                        <div class="preview-visual-stage" id="previewStage" data-profile-theme="antrasit" data-glass-theme="fume">
+                            <!-- Canlı Mimari Pencere / Cam Balkon Simülasyon Çerçevesi -->
+                            <div class="window-mockup-outer" id="windowMockupFrame">
+                                <div class="window-mockup-top-rail"></div>
+                                <div class="window-mockup-panes">
+                                    <div class="window-pane">
+                                        <div class="pane-reflection"></div>
+                                        <span class="pane-handle"></span>
+                                    </div>
+                                    <div class="window-pane">
+                                        <div class="pane-reflection"></div>
+                                    </div>
+                                    <div class="window-pane">
+                                        <div class="pane-reflection"></div>
+                                    </div>
+                                    <div class="window-pane">
+                                        <div class="pane-reflection"></div>
+                                    </div>
+                                </div>
+                                <div class="window-mockup-bottom-rail"></div>
+                            </div>
+
+                            <div class="preview-combo-badges">
+                                <span class="combo-pill" id="previewProfileBadge">Profil: Antrasit Gri</span>
+                                <span class="combo-pill combo-pill-glass" id="previewGlassBadge">Cam: 8mm Füme Temperli</span>
+                            </div>
+                        </div>
+
+                        <div class="preview-details-body">
+                            <h3 class="preview-combo-title" id="previewComboTitle">Antrasit Gri Profil + 8mm Füme Temperli Cam</h3>
+
+                            <div class="facade-recommendation-box">
+                                <div class="facade-icon" aria-hidden="true">☀️</div>
+                                <div>
+                                    <strong>Önerilen Cephe &amp; Mimari Uyum:</strong>
+                                    <p id="previewFacadeText">
+                                        Güney ve Batı cepheli, yoğun güneş alan balkonlar ve kış bahçeleri için idealdir. 8mm Füme Temperli cam güneşin yakıcı etkisini kırarken Antrasit Gri profil modern cephelere kusursuz uyum sağlar.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="preview-advantage-text">
+                                <strong>Isı, Işık ve Mahremiyet Avantajı:</strong>
+                                <p id="previewAdvantageText">
+                                    İçeriden dışarıyı net gösterir, gündüz saatlerinde dışarıdan içerinin görünmesini önemli ölçüde azaltır ve mobilyalarınızı UV ışınlarından korur.
+                                </p>
+                            </div>
+
+                            <!-- Dinamik Performans Göstergeleri -->
+                            <div class="preview-metrics-grid">
+                                <div class="preview-metric-row">
+                                    <div class="preview-metric-label">
+                                        <span>Isı &amp; Ses Yalıtımı</span>
+                                        <strong id="metricThermalVal">%85</strong>
+                                    </div>
+                                    <div class="preview-metric-bar"><span id="metricThermalBar" style="width: 85%"></span></div>
+                                </div>
+                                <div class="preview-metric-row">
+                                    <div class="preview-metric-label">
+                                        <span>Güneş &amp; Parlama Kontrolü</span>
+                                        <strong id="metricSolarVal">%90</strong>
+                                    </div>
+                                    <div class="preview-metric-bar"><span id="metricSolarBar" style="width: 90%"></span></div>
+                                </div>
+                                <div class="preview-metric-row">
+                                    <div class="preview-metric-label">
+                                        <span>Gündüz Mahremiyet Oranı</span>
+                                        <strong id="metricPrivacyVal">%85</strong>
+                                    </div>
+                                    <div class="preview-metric-bar"><span id="metricPrivacyBar" style="width: 85%"></span></div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-block" id="applyComboToQuoteBtn">
+                                Bu Renk ve Cam Kombinasyonu İçin Fiyat Teklifi Al &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. "HANGİ CAM BALKON SİSTEMİ SİZE UYGUN?" KARŞILAŞTIRMA TABLOSU -->
+        <section class="section comparison-section" id="sistem-karsilastirma">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow">KARAR REHBERİ &amp; TEKNİK KARŞILAŞTIRMA</span>
+                    <h2 class="section-title">Hangi Cam Balkon Sistemi Size Uygun?</h2>
+                    <p class="section-desc">
+                        Balkonunuzun kullanım amacına, yalıtım beklentinize ve bütçenize en uygun sistemi seçebilmeniz için en çok tercih edilen 3 sistemimizi tüm teknik kriterleriyle karşılaştırdık.
+                    </p>
+                    <!-- Mobilde Hızlı Sekme Seçici -->
+                    <div class="compare-mobile-tabs" id="compareMobileTabs" role="tablist" aria-label="Karşılaştırılacak Sistem Seçimi">
+                        <button type="button" class="compare-tab-btn active" data-compare-col="1" role="tab" aria-selected="true">Katlanır Cam Balkon</button>
+                        <button type="button" class="compare-tab-btn" data-compare-col="2" role="tab" aria-selected="false">Isıcamlı Eşiksiz Sürme</button>
+                        <button type="button" class="compare-tab-btn" data-compare-col="3" role="tab" aria-selected="false">Kumandalı Giyotin Cam</button>
+                    </div>
+                </div>
+
+                <div class="comparison-table-wrap">
+                    <table class="comparison-table" id="systemComparisonTable">
+                        <thead>
+                            <tr>
+                                <th class="compare-criteria-head">Karşılaştırma Kriterleri</th>
+                                <th class="compare-col-head is-active-col" data-col="1">
+                                    <span class="compare-badge">Ekonomik &amp; Klasik</span>
+                                    <h3>Katlanır Cam Balkon</h3>
+                                    <p>8mm Temperli / Isıcamlı Katlanır Seri</p>
+                                </th>
+                                <th class="compare-col-head compare-featured-col" data-col="2">
+                                    <span class="compare-badge compare-badge-featured">En Çok Tercih Edilen</span>
+                                    <h3>Isıcamlı Eşiksiz Sürme Seri</h3>
+                                    <p>Yüksek Yalıtımlı Engelsiz Sürme Sistem</p>
+                                </th>
+                                <th class="compare-col-head" data-col="3">
+                                    <span class="compare-badge">Motorlu &amp; Premium</span>
+                                    <h3>Kumandalı Giyotin Cam</h3>
+                                    <p>Silinebilir Isıcamlı Dikey Otomatik Sistem</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="criteria-name">
+                                    <strong>Isı ve Ses Yalıtımı</strong>
+                                    <span>Kış aylarında soğuk ve rüzgar kesme performansı</span>
+                                </td>
+                                <td data-col="1" class="is-active-col">
+                                    <div class="compare-stars" aria-label="5 üzerinden 4 yıldız">★★★★☆</div>
+                                    <span class="compare-val-text"><strong>4.2 / 5</strong> • Yüksek Su &amp; Rüzgar Yalıtımı</span>
+                                </td>
+                                <td data-col="2" class="compare-featured-cell">
+                                    <div class="compare-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</div>
+                                    <span class="compare-val-text"><strong>4.9 / 5</strong> • Çift Cam (Isıcam) Oda Konforu</span>
+                                </td>
+                                <td data-col="3">
+                                    <div class="compare-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</div>
+                                    <span class="compare-val-text"><strong>5.0 / 5</strong> • Maksimum Termal &amp; Akustik Yalıtım</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="criteria-name">
+                                    <strong>Silinebilirlik &amp; Temizlik Kolaylığı</strong>
+                                    <span>Dış yüzeylerin içeriden güvenli temizliği</span>
+                                </td>
+                                <td data-col="1" class="is-active-col">
+                                    <span class="compare-pill-good">Çok Kolay</span>
+                                    <p class="compare-sub">Kanatlar içe katlandığı için her iki yüzey içeriden rahatça silinir.</p>
+                                </td>
+                                <td data-col="2" class="compare-featured-cell">
+                                    <span class="compare-pill-good">Pratik Sürme</span>
+                                    <p class="compare-sub">Kanatlar ray üzerinde kaydırılarak balkondan sarkmadan temizlenir.</p>
+                                </td>
+                                <td data-col="3">
+                                    <span class="compare-pill-best">Silinebilir Özel Mekanizma</span>
+                                    <p class="compare-sub">Açılır vasistas mandalı sayesinde tüm camlar içeriden güvenle silinir.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="criteria-name">
+                                    <strong>Eşik Durumu</strong>
+                                    <span>Balkon zemin geçiş ergonomisi</span>
+                                </td>
+                                <td data-col="1" class="is-active-col">
+                                    <strong>Eşikli Alt Kasa</strong>
+                                    <p class="compare-sub">Parapet üstü ve standart balkon korkuluk üstü montaja uygundur.</p>
+                                </td>
+                                <td data-col="2" class="compare-featured-cell">
+                                    <strong>Eşiksiz Alt Ray</strong>
+                                    <p class="compare-sub">Yerde çıkıntı yapmaz; çocuk, yaşlı ve tekerlekli geçişi için engelsizdir.</p>
+                                </td>
+                                <td data-col="3">
+                                    <strong>Sabit Küpeşte Görünümü</strong>
+                                    <p class="compare-sub">Açıldığında alt sabit cam korkuluk/küpeşte görevi görür.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="criteria-name">
+                                    <strong>Kullanım Konforu</strong>
+                                    <span>Açma-kapama mekanizması ve perde uyumu</span>
+                                </td>
+                                <td data-col="1" class="is-active-col">
+                                    <strong>Manuel (Kollu Sistem)</strong>
+                                    <p class="compare-sub">%100 tam açılım sağlar, kanatlar tek köşede toplanır.</p>
+                                </td>
+                                <td data-col="2" class="compare-featured-cell">
+                                    <strong>Manuel Rulmanlı Sürme</strong>
+                                    <p class="compare-sub">İçe doğru yer kaplamaz, tül ve stor perde kullanımını hiç engellemez.</p>
+                                </td>
+                                <td data-col="3">
+                                    <strong>Uzaktan Kumandalı (Motorlu)</strong>
+                                    <p class="compare-sub">Tek tuşla istenilen seviyede durdurulabilir, rüzgar/yağmur kontrolü sağlar.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="criteria-name">
+                                    <strong>İdeal Kullanım Alanı</strong>
+                                    <span>En yüksek verim alınan mekan tipi</span>
+                                </td>
+                                <td data-col="1" class="is-active-col">
+                                    <strong>Ev Balkonları (Düz / L / Oval)</strong>
+                                    <p class="compare-sub">Standart apartman daire balkonları için en verimli çözümdür.</p>
+                                </td>
+                                <td data-col="2" class="compare-featured-cell">
+                                    <strong>Teras, Kış Bahçesi &amp; Geniş Balkon</strong>
+                                    <p class="compare-sub">Ev terasları, kış odaları ve dört mevsim yaşam alanları.</p>
+                                </td>
+                                <td data-col="3">
+                                    <strong>Kış Bahçesi, Teras, Kafe &amp; Otel</strong>
+                                    <p class="compare-sub">Lüks konut terasları, kış bahçeleri, restoran ve ticari işletmeler.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="criteria-name"><strong>Hızlı Teklif &amp; Keşif</strong></td>
+                                <td data-col="1" class="is-active-col">
+                                    <button type="button" class="btn btn-primary btn-block compare-select-btn" data-compare-service="Cam Balkon" data-compare-note="Katlanır Cam Balkon sistemi için fiyat teklifi">
+                                        Bu Sistem İçin Fiyat Al
+                                    </button>
+                                </td>
+                                <td data-col="2" class="compare-featured-cell">
+                                    <button type="button" class="btn btn-whatsapp btn-block compare-select-btn" data-compare-service="Cam Balkon" data-compare-note="Isıcamlı Eşiksiz Sürme Seri için fiyat teklifi">
+                                        Bu Sistem İçin Fiyat Al
+                                    </button>
+                                </td>
+                                <td data-col="3">
+                                    <button type="button" class="btn btn-primary btn-block compare-select-btn" data-compare-service="Kış Bahçesi" data-compare-note="Kumandalı Giyotin Cam & Kış Bahçesi sistemi için fiyat teklifi">
+                                        Bu Sistem İçin Fiyat Al
+                                    </button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+
         <!-- Tamamlanan Seçkin Projeler ve Referanslarımız -->
         <section class="section projects-section" id="projelerimiz">
             <div class="container">
@@ -731,6 +1064,66 @@
 
                 </div>
 
+                <!-- 4. "ÖNCESİ / SONRASI" (BEFORE - AFTER) KAYDIRMALI GÖRSEL MODÜLÜ -->
+                <div class="before-after-showcase" id="oncesi-sonrasi">
+                    <div class="before-after-header">
+                        <div>
+                            <span class="section-eyebrow">MEKAN DÖNÜŞÜMÜ • ÖNCESİ &amp; SONRASI</span>
+                            <h3 class="before-after-title">Mutlu PVC ve Alüminyum Farkını Kaydırarak İnceleyin</h3>
+                            <p class="before-after-desc">
+                                Ortadaki çubuğu parmağınızla veya farenizle sağa-sola kaydırarak açık balkonların ve eski doğramaların anahtar teslim işçiliğimizle nasıl dört mevsim konforlu yaşam alanlarına dönüştüğünü görün.
+                            </p>
+                        </div>
+                        <div class="ba-scenario-buttons" role="tablist" aria-label="Öncesi Sonrası Örnek Seçimi">
+                            <!--
+                                GÖRSEL DEĞİŞTİRME REHBERİ:
+                                Kendi şantiye "Öncesi" ve "Sonrası" fotoğraflarınızı kullanmak için aşağıdaki butonların
+                                data-before-img="..." (Uygulama Öncesi fotoğraf yolu) ve
+                                data-after-img="..." (Uygulama Sonrası fotoğraf yolu) adreslerini değiştirmeniz yeterlidir.
+                            -->
+                            <button type="button" class="ba-scenario-btn active"
+                                data-before-img="images/balkon-kapama.jpg"
+                                data-after-img="images/bahadir-bey-1.jpg"
+                                data-before-label="Uygulama Öncesi: Açık Balkon &amp; Korunaksız Cephe"
+                                data-after-label="Mutlu PVC Sonrası: Katlanır Cam Balkon, Panjur &amp; Sürme Sistem">
+                                1. Konut Balkon Dönüşümü
+                            </button>
+                            <button type="button" class="ba-scenario-btn"
+                                data-before-img="images/kaynasli-ticari-2.jpg"
+                                data-after-img="images/kaynasli-ticari-1.jpg"
+                                data-before-label="Uygulama Öncesi: Eski Dükkan Cephesi &amp; Şantiye Aşaması"
+                                data-after-label="Mutlu PVC Sonrası: C60 Alüminyum Vitrin &amp; Giriş Doğraması">
+                                2. Ticari Dükkan &amp; Vitrin Dönüşümü
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="ba-slider-container" id="baSliderContainer">
+                        <!-- SONRASI (AFTER) GÖRSEL URL'Sİ: Kendi uygulama sonrası fotoğrafınızı src="..." kısmına yazabilirsiniz -->
+                        <div class="ba-layer ba-after-layer">
+                            <img src="images/bahadir-bey-1.jpg" id="baAfterImg" alt="Mutlu PVC Uygulama Sonrası (Kış Bahçesi / Yeni Vitrin)" draggable="false">
+                            <span class="ba-label ba-label-after" id="baAfterLabel">Mutlu PVC Sonrası: Katlanır Cam Balkon, Panjur &amp; Sürme Sistem</span>
+                        </div>
+
+                        <!-- ÖNCESİ (BEFORE) GÖRSEL URL'Sİ: Kendi uygulama öncesi (açık balkon/eski doğrama) fotoğrafınızı src="..." kısmına yazabilirsiniz -->
+                        <div class="ba-layer ba-before-layer" id="baBeforeLayer">
+                            <img src="images/balkon-kapama.jpg" id="baBeforeImg" alt="Uygulama Öncesi (Açık Balkon / Eski Doğrama)" draggable="false">
+                            <span class="ba-label ba-label-before" id="baBeforeLabel">Uygulama Öncesi: Açık Balkon &amp; Korunaksız Cephe</span>
+                        </div>
+
+                        <!-- Orta Kaydırma Çubuğu (Divider & Handle) -->
+                        <div class="ba-divider" id="baDivider" style="left: 50%;" aria-hidden="true">
+                            <div class="ba-handle">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </div>
+
+                        <!-- Dokunmatik ve Klavye Uyumlu Range Input -->
+                        <input type="range" class="ba-range-input" id="baRangeInput" min="0" max="100" value="50" aria-label="Öncesi ve Sonrası Görsel Karşılaştırma Kaydırıcısı">
+                    </div>
+                </div>
+
                 <!-- Kurumsal İnşaat Referans Şeridi -->
                 <div class="references-banner">
                     <div class="references-label">Çözüm Ortağı Olduğumuz Seçkin Projeler & İnşaat Firmaları:</div>
@@ -927,7 +1320,18 @@
                     </div>
 
                     <div class="quote-form-card">
-                        <form id="whatsappQuoteForm" class="quote-form">
+                        <!-- 3. BİREYSEL VE MÜTEAHHİT / TOPLU PROJE (B2B) FORM SEKMELERİ -->
+                        <div class="quote-mode-tabs" role="tablist" aria-label="Teklif Formu Türü Seçimi">
+                            <button type="button" class="quote-mode-tab active" id="tabBtnIndividual" data-quote-tab="individual" role="tab" aria-selected="true" aria-controls="whatsappQuoteForm">
+                                Bireysel Ölçü &amp; Fiyat Hesaplama
+                            </button>
+                            <button type="button" class="quote-mode-tab" id="tabBtnB2B" data-quote-tab="b2b" role="tab" aria-selected="false" aria-controls="b2bQuoteForm">
+                                Müteahhit &amp; Toplu Proje Teklifi (B2B)
+                            </button>
+                        </div>
+
+                        <!-- 1. SEKME: Bireysel Ölçü & Fiyat Hesaplama Formu (Mevcut Çalışan Yapı) -->
+                        <form id="whatsappQuoteForm" class="quote-form quote-tab-panel active" role="tabpanel" aria-labelledby="tabBtnIndividual">
                             <div class="form-header">
                                 <h3>Ölçü ve Teklif Hesaplama</h3>
                                 <p>Yaklaşık bilgileri seçin, anında fiyat teklifi alın</p>
@@ -1036,6 +1440,93 @@
                             <p class="form-legal-footnote">
                                 * Bu form ön bilgilendirme amaçlıdır. Kesin fiyatlandırma, ücretsiz yerinde milimetrik ölçü ve keşif sonrasında belirlenir.
                             </p>
+                        </form>
+
+                        <!-- 2. SEKME: Müteahhit & Toplu Proje Teklifi (B2B) Formu -->
+                        <form id="b2bQuoteForm" class="quote-form quote-tab-panel" role="tabpanel" aria-labelledby="tabBtnB2B" hidden>
+                            <div class="form-header">
+                                <h3>Müteahhit &amp; Toplu Proje Teklifi (B2B)</h3>
+                                <p>Toplu konut, ticari dükkan, otel ve şantiye projeleriniz için doğrudan üretici teklifi alın</p>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="form-group">
+                                    <label for="b2bCompanyName">Firma / Müteahhit / Yetkili Adı *</label>
+                                    <input type="text" id="b2bCompanyName" name="b2bCompanyName" maxlength="80" placeholder="Örn: Yıldız İnşaat / Ahmet B." required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="b2bLocation">Proje Bölgesi / Şantiye Konumu *</label>
+                                    <input type="text" id="b2bLocation" name="b2bLocation" maxlength="80" placeholder="Örn: Düzce Merkez, Aziziye, Ağva vb." required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="b2bProjectScope">Proje Kapsamı (Daire / Dükkan Sayısı veya Otel/Ticari Proje) *</label>
+                                <input type="text" id="b2bProjectScope" name="b2bProjectScope" maxlength="120" placeholder="Örn: 36 Daire + 4 Dükkan Komple Konut Projesi / Butik Otel" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>İstenen İmalat &amp; Uygulama Kalemleri (Çoklu Seçebilirsiniz) *</label>
+                                <div class="b2b-items-grid" id="b2bItemsGroup">
+                                    <label class="b2b-check-card">
+                                        <input type="checkbox" name="b2bItem" value="PVC Doğrama" checked>
+                                        <span>PVC Doğrama (Pencere &amp; Kapı)</span>
+                                    </label>
+                                    <label class="b2b-check-card">
+                                        <input type="checkbox" name="b2bItem" value="Alüminyum Doğrama/Vitrin" checked>
+                                        <span>Alüminyum Doğrama / Vitrin</span>
+                                    </label>
+                                    <label class="b2b-check-card">
+                                        <input type="checkbox" name="b2bItem" value="Cam Balkon">
+                                        <span>Cam Balkon &amp; Kış Bahçesi</span>
+                                    </label>
+                                    <label class="b2b-check-card">
+                                        <input type="checkbox" name="b2bItem" value="Cam/Alüminyum Korkuluk" checked>
+                                        <span>Cam / Alüminyum Korkuluk</span>
+                                    </label>
+                                    <label class="b2b-check-card">
+                                        <input type="checkbox" name="b2bItem" value="Çelik Kapı">
+                                        <span>Daire Çelik Kapı</span>
+                                    </label>
+                                    <label class="b2b-check-card">
+                                        <input type="checkbox" name="b2bItem" value="Panjur/Sineklik">
+                                        <span>Panjur / Sineklik / Duşakabin</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="b2bExtraNote">Proje Detay Notu &amp; Teslim Takvimi (İsteğe Bağlı)</label>
+                                <input type="text" id="b2bExtraNote" name="b2bExtraNote" maxlength="200" placeholder="Örn: Antrasit seri, ısıcamlı, 2 ay içinde montaj başlangıcı vb.">
+                            </div>
+
+                            <!-- Honeypot (Bot/Spam Koruması) -->
+                            <div class="hp-trap" aria-hidden="true">
+                                <label for="b2bWebsiteHp">Web Siteniz</label>
+                                <input type="text" id="b2bWebsiteHp" name="b2bWebsiteHp" tabindex="-1" autocomplete="off">
+                            </div>
+
+                            <div class="form-legal-consent">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="kvkkB2BConsent" required checked>
+                                    <span>
+                                        <button type="button" class="legal-inline-link" data-open-legal="kvkk">6698 Sayılı KVKK Aydınlatma Metni</button>'ni ve <button type="button" class="legal-inline-link" data-open-legal="kullanim">Ön Keşif Koşulları</button>'nı okudum, anladım. *
+                                    </span>
+                                </label>
+                                <p class="kvkk-whatsapp-notice">
+                                    <strong>Bilgilendirme:</strong> Butona tıkladığınızda girdiğiniz bilgiler sunucularımıza kaydedilmez, doğrudan kendi cihazınızdaki WhatsApp uygulaması üzerinden tarafımıza iletilir.
+                                </p>
+                            </div>
+
+                            <button type="submit" id="b2bSubmitBtn" class="btn btn-whatsapp btn-block btn-lg">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.625.846 5.059 2.284 7.033l-1.494 5.46 5.601-1.469c1.908 1.252 4.185 1.976 6.609 1.976 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>
+                                <span class="submit-btn-text">Kurumsal Şantiye &amp; Proje Teklifi İste</span>
+                            </button>
+
+                            <div class="whatsapp-photo-tip" role="note">
+                                <span class="tip-icon" aria-hidden="true">📐</span>
+                                <p><strong>Proje Dosyası İpucu:</strong> WhatsApp sohbeti açıldığında DWG/PDF mimari proje dosyanızı, poz listesini veya şantiye fotoğraflarını doğrudan sohbete ekleyebilirsiniz.</p>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -1650,6 +2141,6 @@
         </a>
     </div>
 
-    <script src="js/main.js?v=2.4"></script>
+    <script src="js/main.js?v=2.5"></script>
 </body>
 </html>
