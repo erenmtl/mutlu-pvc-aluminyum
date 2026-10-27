@@ -1,4 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Yardımcı Güvenlik Fonksiyonları (XSS Sanitization & KVKK İsim Maskeleme)
+    function sanitizeText(input, maxLen = 200) {
+        if (typeof input !== 'string') return '';
+        return input
+            .replace(/[\u0000-\u001F\u007F<>]/g, '')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .slice(0, maxLen);
+    }
+
+    function maskNameForKvkk(fullName) {
+        const cleaned = sanitizeText(fullName, 60);
+        if (!cleaned) return 'Müşteri';
+        const parts = cleaned.split(' ').filter(Boolean);
+        if (parts.length === 1) {
+            return parts[0];
+        }
+        const titles = ['dr.', 'dr', 'av.', 'av', 'mimar', 'müh.', 'muh.'];
+        return parts
+            .map((part, idx) => {
+                if (idx === 0) return part;
+                if (idx === 1 && titles.includes(parts[0].toLowerCase())) return part;
+                return part.charAt(0).toUpperCase() + '.';
+            })
+            .join(' ');
+    }
+
+    // 5 Saniyelik Cooldown / Debounce (Spam & Art Arda Tıklama Koruması)
+    const activeCooldowns = new WeakMap();
+    function applyButtonCooldown(buttonEl, seconds = 5) {
+        if (!buttonEl) return;
+        const labelEl = buttonEl.querySelector('.submit-btn-text');
+        const originalText = labelEl ? labelEl.textContent : buttonEl.textContent;
+        let remaining = seconds;
+
+        buttonEl.disabled = true;
+        buttonEl.classList.add('btn-cooldown');
+        activeCooldowns.set(buttonEl, true);
+
+        const updateLabel = () => {
+            const msg = `Gönderildi • Lütfen bekleyin (${remaining} sn)`;
+            if (labelEl) {
+                labelEl.textContent = msg;
+            } else {
+                buttonEl.textContent = msg;
+            }
+        };
+        updateLabel();
+
+        const timer = setInterval(() => {
+            remaining -= 1;
+            if (remaining <= 0) {
+                clearInterval(timer);
+                buttonEl.disabled = false;
+                buttonEl.classList.remove('btn-cooldown');
+                activeCooldowns.delete(buttonEl);
+                if (labelEl) {
+                    labelEl.textContent = originalText;
+                } else {
+                    buttonEl.textContent = originalText;
+                }
+            } else {
+                updateLabel();
+            }
+        }, 1000);
+    }
+
     // 1. Mobil Menü Kontrolü
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
@@ -22,13 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Üst Menü Kaydırma Efekti
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }, { passive: true });
+    }
 
     // 2.5 Hero Vitrin Görsel Seçici (Gerçek Instagram Fotoğrafları)
     const heroThumbs = document.querySelectorAll('.hero-thumb');
@@ -43,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const imgSrc = thumb.getAttribute('data-img');
             const title = thumb.getAttribute('data-title');
             const sub = thumb.getAttribute('data-sub');
-            if (heroMainImg && imgSrc) heroMainImg.src = imgSrc;
+            if (heroMainImg && imgSrc) heroMainImg.setAttribute('src', imgSrc);
             if (heroBadgeTitle && title) heroBadgeTitle.textContent = title;
             if (heroBadgeSub && sub) heroBadgeSub.textContent = sub;
         });
@@ -75,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3.5 Lightbox Modal (Proje Çoklu Fotoğraf & Video Görüntüleyici)
+    // 3.5 Lightbox Modal (XSS Güvenli DOM API ile Fotoğraf & Video Görüntüleyici)
     const lightboxModal = document.getElementById('lightboxModal');
     const lightboxBackdrop = document.getElementById('lightboxBackdrop');
     const lightboxClose = document.getElementById('lightboxClose');
@@ -89,10 +158,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentGallery = [];
     let currentGalleryIndex = 0;
 
+    function clearElement(el) {
+        if (!el) return;
+        while (el.firstChild) {
+            el.removeChild(el.firstChild);
+        }
+    }
+
     function renderGallerySlide() {
         if (!lightboxBody || currentGallery.length === 0) return;
+        clearElement(lightboxBody);
+
         const src = currentGallery[currentGalleryIndex];
-        lightboxBody.innerHTML = `<img src="${src}" alt="Proje Fotoğrafı ${currentGalleryIndex + 1}">`;
+        const imgEl = document.createElement('img');
+        imgEl.setAttribute('src', src);
+        imgEl.setAttribute('alt', `Proje Fotoğrafı ${currentGalleryIndex + 1}`);
+        imgEl.setAttribute('draggable', 'false');
+        imgEl.addEventListener('contextmenu', e => e.preventDefault());
+        lightboxBody.appendChild(imgEl);
+
         if (lightboxCounter) {
             lightboxCounter.textContent = `${currentGalleryIndex + 1} / ${currentGallery.length}`;
         }
@@ -117,11 +201,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lightboxTitle) lightboxTitle.textContent = title || 'Uygulama Videosu';
         if (lightboxControls) lightboxControls.style.display = 'none';
         if (lightboxBody) {
-            lightboxBody.innerHTML = `
-                <video controls autoplay playsinline poster="${posterUrl || ''}">
-                    <source src="${videoUrl}" type="video/mp4">
-                </video>
-            `;
+            clearElement(lightboxBody);
+            const videoEl = document.createElement('video');
+            videoEl.controls = true;
+            videoEl.autoplay = true;
+            videoEl.playsInline = true;
+            videoEl.setAttribute('controlsList', 'nodownload');
+            if (posterUrl) {
+                videoEl.setAttribute('poster', posterUrl);
+            }
+            videoEl.addEventListener('contextmenu', e => e.preventDefault());
+
+            const sourceEl = document.createElement('source');
+            sourceEl.setAttribute('src', videoUrl);
+            sourceEl.setAttribute('type', 'video/mp4');
+            videoEl.appendChild(sourceEl);
+            lightboxBody.appendChild(videoEl);
         }
         if (lightboxModal) {
             lightboxModal.classList.add('open');
@@ -133,9 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!lightboxModal) return;
         lightboxModal.classList.remove('open');
         lightboxModal.setAttribute('aria-hidden', 'true');
-        if (lightboxBody) {
-            lightboxBody.innerHTML = '';
-        }
+        clearElement(lightboxBody);
     }
 
     document.querySelectorAll('.project-img-wrap').forEach(wrap => {
@@ -200,20 +293,33 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeLightbox();
         if (lightboxModal && lightboxModal.classList.contains('open') && currentGallery.length > 1) {
-            if (e.key === 'ArrowLeft') lightboxPrev.click();
-            if (e.key === 'ArrowRight') lightboxNext.click();
+            if (e.key === 'ArrowLeft' && lightboxPrev) lightboxPrev.click();
+            if (e.key === 'ArrowRight' && lightboxNext) lightboxNext.click();
         }
     });
 
     // Sayfadaki Reels videolarından biri oynatıldığında diğerlerini duraklat
     const allVideos = document.querySelectorAll('video');
     allVideos.forEach(vid => {
+        vid.setAttribute('controlsList', 'nodownload');
         vid.addEventListener('play', () => {
             allVideos.forEach(other => {
                 if (other !== vid && !other.paused) {
                     other.pause();
                 }
             });
+        });
+    });
+
+    // Görsel & Video Kopyalama Koruması (Sağ Tık ve Sürükleme Engelleme)
+    const protectedMediaSelectors = '.showcase-img, .hero-thumb img, .project-img-wrap, .project-img-wrap img, .reel-video-box, .reel-video-box video, .lightbox-body';
+    document.querySelectorAll(protectedMediaSelectors).forEach(el => {
+        el.setAttribute('draggable', 'false');
+        el.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+        el.addEventListener('dragstart', (e) => {
+            e.preventDefault();
         });
     });
 
@@ -234,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. İnteraktif Ön Keşif ve WhatsApp Teklif Hesaplama Formu
+    // 5. İnteraktif Ön Keşif ve WhatsApp Teklif Hesaplama Formu (XSS & Spam Korumalı)
     const quoteForm = document.getElementById('whatsappQuoteForm');
     const heightInput = document.getElementById('heightInput');
     const unitRadios = document.querySelectorAll('input[name="measureUnit"]');
@@ -242,10 +348,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const calculatedAreaEl = document.getElementById('calculatedArea');
     const locationSelect = document.getElementById('locationSelect');
     const extraNoteInput = document.getElementById('extraNote');
+    const quoteWebsiteHp = document.getElementById('quoteWebsiteHp');
+    const quoteSubmitBtn = document.getElementById('quoteSubmitBtn');
 
     function getSelectedUnit() {
         const checked = document.querySelector('input[name="measureUnit"]:checked');
-        return checked ? checked.value : 'cm';
+        return checked && checked.value === 'metre' ? 'metre' : 'cm';
     }
 
     function updateUnitPlaceholders() {
@@ -273,13 +381,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const h = parseFloat(heightInput.value);
         const unit = getSelectedUnit();
 
-        if (!isNaN(w) && !isNaN(h) && w > 0 && h > 0) {
-            let areaSqm = 0;
-            if (unit === 'cm') {
-                areaSqm = (w / 100) * (h / 100);
-            } else {
-                areaSqm = w * h;
-            }
+        if (Number.isFinite(w) && Number.isFinite(h) && w > 0 && h > 0 && w <= 100000 && h <= 100000) {
+            const areaSqm = unit === 'cm' ? (w / 100) * (h / 100) : w * h;
             const formattedArea = areaSqm.toLocaleString('tr-TR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
@@ -303,31 +406,42 @@ document.addEventListener('DOMContentLoaded', () => {
         quoteForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const service = serviceTypeSelect ? serviceTypeSelect.value : '';
+            // Honeypot Bot Kontrolü
+            if (quoteWebsiteHp && quoteWebsiteHp.value.trim() !== '') {
+                return;
+            }
+
+            // 5 Saniye Rate-Limit / Cooldown Kontrolü
+            const submitButton = quoteSubmitBtn || quoteForm.querySelector('button[type="submit"]');
+            if (submitButton && activeCooldowns.get(submitButton)) {
+                return;
+            }
+
+            const service = sanitizeText(serviceTypeSelect ? serviceTypeSelect.value : '', 80);
             const unit = getSelectedUnit();
-            const widthVal = widthInput ? widthInput.value.trim() : '';
-            const heightVal = heightInput ? heightInput.value.trim() : '';
-            const location = locationSelect ? locationSelect.value : '';
-            const extraNote = extraNoteInput ? extraNoteInput.value.trim() : '';
+            const widthVal = sanitizeText(widthInput ? widthInput.value : '', 12);
+            const heightVal = sanitizeText(heightInput ? heightInput.value : '', 12);
+            const location = sanitizeText(locationSelect ? locationSelect.value : '', 80);
+            const extraNote = sanitizeText(extraNoteInput ? extraNoteInput.value : '', 180);
 
             const w = parseFloat(widthVal);
             const h = parseFloat(heightVal);
-            let areaInfo = '';
-
-            if (!isNaN(w) && !isNaN(h) && w > 0 && h > 0) {
-                const areaSqm = unit === 'cm' ? (w / 100) * (h / 100) : w * h;
-                const formattedArea = areaSqm.toLocaleString('tr-TR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-                areaInfo = ` (Yaklaşık ${formattedArea} m²)`;
+            if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) {
+                return;
             }
+
+            const areaSqm = unit === 'cm' ? (w / 100) * (h / 100) : w * h;
+            const formattedArea = areaSqm.toLocaleString('tr-TR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+            const areaInfo = ` (Yaklaşık ${formattedArea} m²)`;
 
             const messageLines = [
                 'Merhaba *Mutlu PVC ve Alüminyum*, web siteniz üzerinden ön keşif ve fiyat teklifi almak istiyorum:',
                 '',
                 `• *Hizmet Türü:* ${service}`,
-                `• *Yaklaşık Ölçü:* Genişlik: ${widthVal} ${unit} x Yükseklik: ${heightVal} ${unit}${areaInfo}`,
+                `• *Yaklaşık Ölçü:* Genişlik: ${w} ${unit} x Yükseklik: ${h} ${unit}${areaInfo}`,
                 `• *İlçe / Bölge:* ${location}`
             ];
 
@@ -340,6 +454,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const encodedMessage = encodeURIComponent(messageLines.join('\n'));
             const whatsappUrl = `https://wa.me/905071908181?text=${encodedMessage}`;
 
+            if (submitButton) {
+                applyButtonCooldown(submitButton, 5);
+            }
+
             window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
         });
     }
@@ -350,13 +468,15 @@ document.addEventListener('DOMContentLoaded', () => {
         yearSpan.textContent = String(new Date().getFullYear());
     }
 
-    // 6. Müşteri Geri Bildirim ve Yıldız Değerlendirme Sistemi
+    // 6. Müşteri Geri Bildirim ve Yıldız Değerlendirme Sistemi (XSS & KVKK Korumalı)
     const starBtns = document.querySelectorAll('#starSelector .star-btn');
     const feedbackRatingInput = document.getElementById('feedbackRating');
     const starRatingLabel = document.getElementById('starRatingLabel');
     const feedbackForm = document.getElementById('feedbackForm');
     const feedbackSuccessMsg = document.getElementById('feedbackSuccessMsg');
     const reviewsGrid = document.getElementById('reviewsGrid');
+    const feedbackWebsiteHp = document.getElementById('feedbackWebsiteHp');
+    const feedbackSubmitBtn = document.getElementById('feedbackSubmitBtn');
 
     const ratingDescriptions = {
         1: '1 / 5 - Geliştirilmeli',
@@ -383,47 +503,82 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const name = (document.getElementById('feedbackName')?.value || '').trim();
-            const category = document.getElementById('feedbackCategory')?.value || 'Müşteri Memnuniyeti';
-            const service = document.getElementById('feedbackService')?.value || '';
-            const region = (document.getElementById('feedbackRegion')?.value || 'Düzce').trim() || 'Düzce';
-            const message = (document.getElementById('feedbackMessage')?.value || '').trim();
-            const rating = parseInt(feedbackRatingInput?.value || '5', 10);
+            // Honeypot Bot Kontrolü
+            if (feedbackWebsiteHp && feedbackWebsiteHp.value.trim() !== '') {
+                return;
+            }
+
+            // 5 Saniye Cooldown Kontrolü
+            const submitButton = feedbackSubmitBtn || feedbackForm.querySelector('button[type="submit"]');
+            if (submitButton && activeCooldowns.get(submitButton)) {
+                return;
+            }
+
+            const rawName = sanitizeText(document.getElementById('feedbackName')?.value || '', 60);
+            const maskedName = maskNameForKvkk(rawName);
+            const category = sanitizeText(document.getElementById('feedbackCategory')?.value || 'Müşteri Memnuniyeti', 80);
+            const service = sanitizeText(document.getElementById('feedbackService')?.value || '', 80);
+            const region = sanitizeText(document.getElementById('feedbackRegion')?.value || 'Düzce', 60) || 'Düzce';
+            const message = sanitizeText(document.getElementById('feedbackMessage')?.value || '', 500);
+            const rawRating = parseInt(feedbackRatingInput?.value || '5', 10);
+            const rating = Number.isFinite(rawRating) ? Math.min(5, Math.max(1, rawRating)) : 5;
             const starsVisual = '★'.repeat(rating) + '☆'.repeat(Math.max(0, 5 - rating));
 
-            if (!name || !message) return;
+            if (!rawName || !message) return;
 
-            // Ekrandaki yorum listesine anında ekle (kullanıcı deneyimi için)
+            // XSS Güvenli DOM Oluşturma (innerHTML kullanmadan sadece textContent ile)
             if (reviewsGrid && rating >= 4) {
-                const initials = name
+                const initials = maskedName
                     .split(' ')
                     .filter(Boolean)
                     .slice(0, 2)
-                    .map(part => part[0].toUpperCase() + '.')
+                    .map(part => part.charAt(0).toUpperCase() + '.')
                     .join('');
 
                 const newCard = document.createElement('article');
                 newCard.className = 'review-card';
-                newCard.innerHTML = `
-                    <div class="review-card-top">
-                        <div class="review-author">
-                            <span class="author-avatar">${initials || 'M.M.'}</span>
-                            <div>
-                                <h4></h4>
-                                <span></span>
-                            </div>
-                        </div>
-                        <span class="review-stars" aria-label="${rating} Yıldız">${'★'.repeat(rating)}</span>
-                    </div>
-                    <p class="review-text"></p>
-                    <span class="review-badge">Yeni Geri Bildirim • ${service}</span>
-                `;
-                const h4El = newCard.querySelector('h4');
-                const spanEl = newCard.querySelector('.review-author span');
-                const pEl = newCard.querySelector('.review-text');
-                if (h4El) h4El.textContent = name;
-                if (spanEl) spanEl.textContent = `${region} • ${service}`;
-                if (pEl) pEl.textContent = `"${message}"`;
+
+                const topDiv = document.createElement('div');
+                topDiv.className = 'review-card-top';
+
+                const authorDiv = document.createElement('div');
+                authorDiv.className = 'review-author';
+
+                const avatarSpan = document.createElement('span');
+                avatarSpan.className = 'author-avatar';
+                avatarSpan.textContent = initials || 'M.M.';
+
+                const authorMetaDiv = document.createElement('div');
+                const h4El = document.createElement('h4');
+                h4El.textContent = maskedName;
+                const metaSpan = document.createElement('span');
+                metaSpan.textContent = `${region} • ${service}`;
+
+                authorMetaDiv.appendChild(h4El);
+                authorMetaDiv.appendChild(metaSpan);
+                authorDiv.appendChild(avatarSpan);
+                authorDiv.appendChild(authorMetaDiv);
+
+                const starsSpan = document.createElement('span');
+                starsSpan.className = 'review-stars';
+                starsSpan.setAttribute('aria-label', `${rating} Yıldız`);
+                starsSpan.textContent = '★'.repeat(rating);
+
+                topDiv.appendChild(authorDiv);
+                topDiv.appendChild(starsSpan);
+
+                const textP = document.createElement('p');
+                textP.className = 'review-text';
+                textP.textContent = `"${message}"`;
+
+                const badgeSpan = document.createElement('span');
+                badgeSpan.className = 'review-badge';
+                badgeSpan.textContent = `Yeni Geri Bildirim • ${service}`;
+
+                newCard.appendChild(topDiv);
+                newCard.appendChild(textP);
+                newCard.appendChild(badgeSpan);
+
                 reviewsGrid.prepend(newCard);
             }
 
@@ -431,10 +586,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 feedbackSuccessMsg.hidden = false;
             }
 
+            if (submitButton) {
+                applyButtonCooldown(submitButton, 5);
+            }
+
             const waLines = [
                 'Merhaba *Mutlu PVC ve Alüminyum*, web siteniz üzerinden geri bildirim / değerlendirme gönderiyorum:',
                 '',
-                `• *Ad Soyad:* ${name}`,
+                `• *Ad Soyad:* ${rawName}`,
                 `• *Konu:* ${category}`,
                 `• *Memnuniyet Puanı:* ${starsVisual} (${rating}/5)`,
                 `• *İlgili Hizmet:* ${service}`,
@@ -452,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. Yasal Metinler Modalı (KVKK, Gizlilik, Çerez Politikası, Kullanım Koşulları)
+    // 7. Yasal Metinler Modalı (KVKK, Gizlilik, Çerez Politikası, Ön Keşif Koşulları)
     const legalModal = document.getElementById('legalModal');
     const legalBackdrop = document.getElementById('legalBackdrop');
     const legalModalClose = document.getElementById('legalModalClose');
@@ -489,6 +648,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openLegalTriggers.forEach(trigger => {
         trigger.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             const targetTab = trigger.getAttribute('data-open-legal') || 'kvkk';
             openLegalModal(targetTab);
         });

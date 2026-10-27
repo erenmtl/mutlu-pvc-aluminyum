@@ -3054,3 +3054,172 @@ ul {
         font-size: 0.86rem;
     }
 }
+
+
+/* ==========================================================================
+   Yasal Uyumluluk, Güvenlik (Honeypot, Görsel Koruma) ve Hızlı UX Dokunuşları
+   ========================================================================== */
+
+/* Görsel & Video Kopyalama / Sürükleme Koruması */
+.showcase-img,
+.hero-thumb img,
+.project-img-wrap img,
+.lightbox-body img,
+.reel-video-box video {
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+/* Honeypot (Bot Tuzak Alanı - İnsan Kullanıcıya Görünmez) */
+.hp-trap {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* 5 Saniye Cooldown (Buton Kilitleme) Durumu */
+.btn-cooldown,
+button:disabled.btn-cooldown {
+    opacity: 0.72;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
+/* Form KVKK WhatsApp Bilgilendirme Notu */
+.kvkk-whatsapp-notice {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--color-silver-border);
+    font-size: 0.77rem;
+    line-height: 1.45;
+    color: var(--color-text-muted);
+}
+
+.kvkk-whatsapp-notice strong {
+    color: var(--color-anthracite);
+}
+
+/* Fotoğraf Gönderme İpucu Kutusu */
+.whatsapp-photo-tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 14px;
+    padding: 12px 14px;
+    background-color: #F0F9FF;
+    border: 1px solid #BAE6FD;
+    border-left: 4px solid var(--color-blue);
+    border-radius: 10px;
+    color: var(--color-anthracite);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.whatsapp-photo-tip .tip-icon {
+    font-size: 1.15rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+
+.whatsapp-photo-tip p {
+    margin: 0;
+}
+
+/* Müşteri Yorumları Şeffaflık Notu & Google İşletme Profili Butonu */
+.feedback-transparency-box {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.feedback-transparency-note {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    max-width: 620px;
+    line-height: 1.45;
+}
+
+.google-business-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: var(--color-blue);
+    background-color: var(--color-blue-soft);
+    border: 1px solid #BAE6FD;
+    padding: 8px 16px;
+    border-radius: 99px;
+    transition: var(--transition);
+}
+
+.google-business-link:hover {
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    border-color: var(--color-blue);
+    transform: translateY(-1px);
+}
+
+/* Masaüstü / Mobil Sabit Alt Bar Etiket Kontrolü */
+.fab-label-mobile {
+    display: none;
+}
+
+.fab-label-desktop {
+    display: inline;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 84px;
+    }
+
+    .footer {
+        padding-bottom: 36px;
+    }
+
+    .floating-actions {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1500;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 8px;
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+        background: rgba(15, 23, 42, 0.97);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(248, 250, 252, 0.15);
+        box-shadow: 0 -8px 26px rgba(15, 23, 42, 0.35);
+    }
+
+    .fab-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 12px 8px;
+        border-radius: 10px;
+        font-size: 0.82rem;
+        line-height: 1.2;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .fab-label-desktop {
+        display: none;
+    }
+
+    .fab-label-mobile {
+        display: inline;
+    }
+}

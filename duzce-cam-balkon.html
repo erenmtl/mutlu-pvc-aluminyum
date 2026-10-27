@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=2.3">
+    <link rel="stylesheet" href="css/style.css?v=2.4">
 
     <script type="application/ld+json">
     {
@@ -385,19 +385,33 @@
 
                             <div class="form-group">
                                 <label for="extraNote">Cam Rengi / Profil Tercihiniz (İsteğe Bağlı)</label>
-                                <input type="text" id="extraNote" name="extraNote" placeholder="Örn: Füme cam, antrasit gri profil, ısıcamlı vb.">
+                                <input type="text" id="extraNote" name="extraNote" maxlength="180" placeholder="Örn: Füme cam, antrasit gri profil, ısıcamlı vb.">
+                            </div>
+
+                            <div class="hp-trap" aria-hidden="true">
+                                <label for="quoteWebsiteHp">Web Siteniz</label>
+                                <input type="text" id="quoteWebsiteHp" name="quoteWebsiteHp" tabindex="-1" autocomplete="off">
                             </div>
 
                             <div class="form-legal-consent">
                                 <label class="checkbox-label">
                                     <input type="checkbox" required checked>
-                                    <span>KVKK Aydınlatma Metni ve Ön Keşif Bilgilendirmesini okudum, bilgilerimin teklif amacıyla WhatsApp üzerinden iletilmesini onaylıyorum. *</span>
+                                    <span>6698 Sayılı KVKK Aydınlatma Metni'ni ve Ön Keşif Koşulları'nı okudum, anladım. *</span>
                                 </label>
+                                <p class="kvkk-whatsapp-notice">
+                                    <strong>Bilgilendirme:</strong> Butona tıkladığınızda girdiğiniz bilgiler sunucularımıza kaydedilmez, doğrudan kendi cihazınızdaki WhatsApp uygulaması üzerinden tarafımıza iletilir.
+                                </p>
                             </div>
 
-                            <button type="submit" class="btn btn-whatsapp btn-block btn-lg">
-                                WhatsApp ile Cam Balkon Fiyatı İste
+                            <button type="submit" id="quoteSubmitBtn" class="btn btn-whatsapp btn-block btn-lg">
+                                <span class="submit-btn-text">WhatsApp ile Cam Balkon Fiyatı İste</span>
                             </button>
+
+                            <div class="whatsapp-photo-tip" role="note">
+                                <span class="tip-icon" aria-hidden="true">💡</span>
+                                <p><strong>İpucu:</strong> WhatsApp sohbeti açıldığında balkonunuzun veya uygulanacak alanın 1-2 fotoğrafını da mesaja eklerseniz çok daha net bir ön fiyat verebiliriz.</p>
+                            </div>
+
                             <p class="form-legal-footnote">* Kesin fiyatlandırma ücretsiz yerinde milimetrik keşif sonrasında belirlenir.</p>
                         </form>
                     </div>
@@ -409,7 +423,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear">2026</span> Mutlu PVC ve Alüminyum (mutlupvcaluminyum.com). Tüm hakları saklıdır.</p>
+                <p>&copy; <span id="currentYear">2026</span> Mutlu PVC ve Alüminyum Doğrama Sistemleri (mutlupvcaluminyum.com) • Düzce Merkez &amp; Çevre İller • Tel: 0507 190 81 81</p>
                 <div class="footer-bottom-links">
                     <a href="index.html" class="footer-bottom-btn">Ana Sayfa</a>
                     <span>•</span>
@@ -425,13 +439,14 @@
 
     <div class="floating-actions" aria-label="Hızlı İletişim Butonları">
         <a href="tel:+905071908181" class="fab-btn fab-phone">
-            <span class="fab-label">Hemen Ara</span>
+            <span class="fab-label-desktop">Hemen Ara</span>
+            <span class="fab-label-mobile">Hemen Ara: 0507 190 81 81</span>
         </a>
         <a href="https://wa.me/905071908181?text=Merhaba%20Mutlu%20PVC%20ve%20Al%C3%BCminyum%2C%20cam%20balkon%20fiyat%20teklifi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="fab-btn fab-whatsapp">
-            <span class="fab-label">WhatsApp Fiyat Al</span>
+            <span class="fab-label">WhatsApp'tan Fiyat Al</span>
         </a>
     </div>
 
-    <script src="js/main.js?v=2.3"></script>
+    <script src="js/main.js?v=2.4"></script>
 </body>
 </html>

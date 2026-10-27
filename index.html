@@ -34,7 +34,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css?v=2.3">
+    <link rel="stylesheet" href="css/style.css?v=2.4">
 
     <!-- Schema.org LocalBusiness, OfferCatalog & FAQPage Structured Data for Google SEO -->
     <script type="application/ld+json">
@@ -705,10 +705,10 @@
                         </div>
                     </article>
 
-                    <!-- 9. Katlanır Cam Balkon, Sürme Kapı & Elektrikli Panjur (Dr. Bahadır Bey Projesi) -->
+                    <!-- 9. Katlanır Cam Balkon, Sürme Kapı & Elektrikli Panjur (Dr. Bahadır K. Projesi) -->
                     <article class="project-card" data-category="cam-balkon">
-                        <div class="project-img-wrap" data-gallery="images/bahadir-bey-1.jpg,images/bahadir-bey-2.jpg,images/bahadir-bey-3.jpg,images/bahadir-bey-4.jpg,images/bahadir-bey-5.jpg,images/bahadir-bey-6.jpg,images/bahadir-bey-7.jpg,images/bahadir-bey-8.jpg" data-title="Katlanır Cam Balkon, Sürme Kapı & Elektrikli Panjur Uygulaması">
-                            <img src="images/bahadir-bey-1.jpg" alt="Mutlu PVC Alüminyum Katlanır Cam Balkon, Sürme Kapı, Elektrikli Panjur ve Merdiven Korkuluğu" loading="lazy">
+                        <div class="project-img-wrap" data-gallery="images/bahadir-bey-1.jpg,images/bahadir-bey-2.jpg,images/bahadir-bey-3.jpg,images/bahadir-bey-4.jpg,images/bahadir-bey-5.jpg,images/bahadir-bey-6.jpg,images/bahadir-bey-7.jpg,images/bahadir-bey-8.jpg" data-title="Katlanır Cam Balkon, Sürme Kapı & Elektrikli Panjur Uygulaması (Dr. Bahadır K.)">
+                            <img src="images/bahadir-bey-1.jpg" alt="Mutlu PVC Alüminyum Katlanır Cam Balkon, Sürme Kapı, Elektrikli Panjur ve Merdiven Korkuluğu" loading="lazy" draggable="false">
                             <span class="project-category-badge">Cam Balkon & Panjur</span>
                             <span class="project-location-tag">Düzce</span>
                             <button type="button" class="project-media-btn">
@@ -719,7 +719,7 @@
                         <div class="project-body">
                             <h3 class="project-title">Katlanır Cam Balkon, Sürme Kapı & Elektrikli Panjur</h3>
                             <p class="project-desc">
-                                Doktor Bahadır Bey konut projesinde katlanır cam balkon, sürme kapı, elektrikli panjur, merdiven korkuluğu, PVC doğrama, PVC kapı ve stor sineklik komple uygulaması.
+                                Dr. Bahadır K. konut projesinde katlanır cam balkon, sürme kapı, elektrikli panjur, merdiven korkuluğu, PVC doğrama, PVC kapı ve stor sineklik komple uygulaması.
                             </p>
                             <div class="project-tags">
                                 <span>Katlanır Cam Balkon</span>
@@ -964,11 +964,11 @@
                             <div class="form-grid-2">
                                 <div class="form-group">
                                     <label for="widthInput">Yaklaşık Genişlik (<span class="unit-label">cm</span>) *</label>
-                                    <input type="number" id="widthInput" name="widthInput" inputmode="decimal" placeholder="Örn: 450" min="0.1" step="any" required>
+                                    <input type="number" id="widthInput" name="widthInput" inputmode="decimal" placeholder="Örn: 450" min="0.1" max="10000" step="any" maxlength="10" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="heightInput">Yaklaşık Yükseklik (<span class="unit-label">cm</span>) *</label>
-                                    <input type="number" id="heightInput" name="heightInput" inputmode="decimal" placeholder="Örn: 200" min="0.1" step="any" required>
+                                    <input type="number" id="heightInput" name="heightInput" inputmode="decimal" placeholder="Örn: 200" min="0.1" max="10000" step="any" maxlength="10" required>
                                 </div>
                             </div>
 
@@ -1000,7 +1000,13 @@
                             <!-- Ek Not -->
                             <div class="form-group">
                                 <label for="extraNote">Eklemek İstediğiniz Detay (İsteğe Bağlı)</label>
-                                <input type="text" id="extraNote" name="extraNote" placeholder="Örn: Antrasit gri profil, ısıcamlı, 3. kat daire vb.">
+                                <input type="text" id="extraNote" name="extraNote" maxlength="180" placeholder="Örn: Antrasit gri profil, ısıcamlı, 3. kat daire vb.">
+                            </div>
+
+                            <!-- Honeypot (Bot/Spam Koruması - Görünmez Tuzak Alan) -->
+                            <div class="hp-trap" aria-hidden="true">
+                                <label for="quoteWebsiteHp">Web Siteniz</label>
+                                <input type="text" id="quoteWebsiteHp" name="quoteWebsiteHp" tabindex="-1" autocomplete="off">
                             </div>
 
                             <!-- KVKK ve Ön Bilgilendirme Onayı -->
@@ -1008,15 +1014,25 @@
                                 <label class="checkbox-label">
                                     <input type="checkbox" id="kvkkQuoteConsent" required checked>
                                     <span>
-                                        <button type="button" class="legal-inline-link" data-open-legal="kvkk">6698 Sayılı KVKK Aydınlatma Metni</button>'ni ve <button type="button" class="legal-inline-link" data-open-legal="kullanim">Ön Keşif Koşulları</button>'nı okudum. Paylaştığım ölçü ve iletişim bilgilerinin teklif oluşturulması amacıyla WhatsApp üzerinden iletilmesini kabul ediyorum. *
+                                        <button type="button" class="legal-inline-link" data-open-legal="kvkk">6698 Sayılı KVKK Aydınlatma Metni</button>'ni ve <button type="button" class="legal-inline-link" data-open-legal="kullanim">Ön Keşif Koşulları</button>'nı okudum, anladım. *
                                     </span>
                                 </label>
+                                <p class="kvkk-whatsapp-notice">
+                                    <strong>Bilgilendirme:</strong> Butona tıkladığınızda girdiğiniz bilgiler sunucularımıza kaydedilmez, doğrudan kendi cihazınızdaki WhatsApp uygulaması üzerinden tarafımıza iletilir.
+                                </p>
                             </div>
 
-                            <button type="submit" class="btn btn-whatsapp btn-block btn-lg">
+                            <button type="submit" id="quoteSubmitBtn" class="btn btn-whatsapp btn-block btn-lg">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.625.846 5.059 2.284 7.033l-1.494 5.46 5.601-1.469c1.908 1.252 4.185 1.976 6.609 1.976 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>
-                                WhatsApp ile Fiyat Teklifi İste
+                                <span class="submit-btn-text">WhatsApp ile Fiyat Teklifi İste</span>
                             </button>
+
+                            <!-- Fotoğraf Gönderme İpucu Kutusu -->
+                            <div class="whatsapp-photo-tip" role="note">
+                                <span class="tip-icon" aria-hidden="true">💡</span>
+                                <p><strong>İpucu:</strong> WhatsApp sohbeti açıldığında balkonunuzun veya uygulanacak alanın 1-2 fotoğrafını da mesaja eklerseniz çok daha net bir ön fiyat verebiliriz.</p>
+                            </div>
+
                             <p class="form-legal-footnote">
                                 * Bu form ön bilgilendirme amaçlıdır. Kesin fiyatlandırma, ücretsiz yerinde milimetrik ölçü ve keşif sonrasında belirlenir.
                             </p>
@@ -1039,19 +1055,28 @@
                         <div class="rating-stars-static" aria-label="5 üzerinden 4.9 yıldız">★★★★★</div>
                         <span><strong>4.9 / 5.0</strong> Ortalama Müşteri Memnuniyeti • %100 Kendi İmalatımız &amp; Garantili Montaj</span>
                     </div>
+                    <div class="feedback-transparency-box">
+                        <p class="feedback-transparency-note">
+                            Değerlendirmeler gerçek müşteri geri bildirimlerine ve tamamlanan şantiye teslimlerimize dayanmaktadır.
+                        </p>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=Mutlu+PVC+ve+Al%C3%BCminyum+D%C3%BCzce" target="_blank" rel="noopener noreferrer" class="google-business-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Google Haritalar / İşletme Profilimizi İnceleyin
+                        </a>
+                    </div>
                     <div class="mobile-swipe-hint">
                         <span>&#8592; Yorumları parmağınızla yana kaydırarak okuyabilirsiniz &#8594;</span>
                     </div>
                 </div>
 
-                <!-- Gerçek Bölge ve Hizmet Odaklı Müşteri Yorumları -->
+                <!-- Gerçek Bölge ve Hizmet Odaklı Müşteri Yorumları (KVKK Maskeli) -->
                 <div class="reviews-grid" id="reviewsGrid">
                     <article class="review-card">
                         <div class="review-card-top">
                             <div class="review-author">
                                 <span class="author-avatar">B.K.</span>
                                 <div>
-                                    <h4>Bahadır Bey</h4>
+                                    <h4>Dr. Bahadır K.</h4>
                                     <span>Düzce Merkez • Katlanır Cam Balkon &amp; Panjur</span>
                                 </div>
                             </div>
@@ -1181,7 +1206,7 @@
                             <div class="form-grid-2">
                                 <div class="form-group">
                                     <label for="feedbackName">Adınız Soyadınız *</label>
-                                    <input type="text" id="feedbackName" name="feedbackName" placeholder="Örn: Ali Yılmaz" required>
+                                    <input type="text" id="feedbackName" name="feedbackName" maxlength="60" placeholder="Örn: Ali Y." required>
                                 </div>
                                 <div class="form-group">
                                     <label for="feedbackCategory">Geri Bildirim Konusu *</label>
@@ -1207,31 +1232,40 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="feedbackRegion">İlçe / Bölge</label>
-                                    <input type="text" id="feedbackRegion" name="feedbackRegion" placeholder="Örn: Düzce Merkez, Kaynaşlı vb.">
+                                    <input type="text" id="feedbackRegion" name="feedbackRegion" maxlength="60" placeholder="Örn: Düzce Merkez, Kaynaşlı vb.">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="feedbackMessage">Görüş, Yorum veya Talebiniz *</label>
-                                <textarea id="feedbackMessage" name="feedbackMessage" rows="3" placeholder="Yapılan uygulama, işçilik veya talebiniz hakkındaki düşüncelerinizi yazabilirsiniz..." required></textarea>
+                                <textarea id="feedbackMessage" name="feedbackMessage" rows="3" maxlength="500" placeholder="Yapılan uygulama, işçilik veya talebiniz hakkındaki düşüncelerinizi yazabilirsiniz..." required></textarea>
+                            </div>
+
+                            <!-- Honeypot (Bot/Spam Koruması - Görünmez Tuzak Alan) -->
+                            <div class="hp-trap" aria-hidden="true">
+                                <label for="feedbackWebsiteHp">Web Siteniz</label>
+                                <input type="text" id="feedbackWebsiteHp" name="feedbackWebsiteHp" tabindex="-1" autocomplete="off">
                             </div>
 
                             <div class="form-legal-consent">
                                 <label class="checkbox-label">
                                     <input type="checkbox" id="kvkkFeedbackConsent" required checked>
                                     <span>
-                                        <button type="button" class="legal-inline-link" data-open-legal="kvkk">KVKK Aydınlatma Metni</button>'ni okudum; geri bildirimimin değerlendirilmesi ve tarafıma dönüş yapılabilmesi amacıyla işlenmesini kabul ediyorum. *
+                                        <button type="button" class="legal-inline-link" data-open-legal="kvkk">6698 Sayılı KVKK Aydınlatma Metni</button>'ni ve <button type="button" class="legal-inline-link" data-open-legal="kullanim">Ön Keşif Koşulları</button>'nı okudum, anladım. *
                                     </span>
                                 </label>
+                                <p class="kvkk-whatsapp-notice">
+                                    <strong>Bilgilendirme:</strong> Butona tıkladığınızda girdiğiniz bilgiler sunucularımıza kaydedilmez, doğrudan kendi cihazınızdaki WhatsApp uygulaması üzerinden tarafımıza iletilir.
+                                </p>
                             </div>
 
                             <div class="feedback-success-msg" id="feedbackSuccessMsg" role="status" aria-live="polite" hidden>
                                 <strong>Teşekkür ederiz!</strong> Geri bildiriminiz kaydedildi ve müşteri ilişkileri hattımıza yönlendiriliyor.
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <button type="submit" id="feedbackSubmitBtn" class="btn btn-primary btn-block btn-lg">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                                Geri Bildirimi Gönder
+                                <span class="submit-btn-text">Geri Bildirimi Gönder</span>
                             </button>
                         </form>
                     </div>
@@ -1404,46 +1438,50 @@
                     <h4>Kurumsal &amp; Yasal</h4>
                     <ul>
                         <li><button type="button" class="footer-legal-link" data-open-legal="kvkk">KVKK Aydınlatma Metni</button></li>
-                        <li><button type="button" class="footer-legal-link" data-open-legal="gizlilik">Gizlilik Politikası</button></li>
+                        <li><button type="button" class="footer-legal-link" data-open-legal="kullanim">Ön Keşif Koşulları &amp; Yasal Uyarı</button></li>
                         <li><button type="button" class="footer-legal-link" data-open-legal="cerez">Çerez (Cookie) Politikası</button></li>
-                        <li><button type="button" class="footer-legal-link" data-open-legal="kullanim">Kullanım Koşulları &amp; Yasal Uyarı</button></li>
+                        <li><button type="button" class="footer-legal-link" data-open-legal="gizlilik">Gizlilik Politikası</button></li>
                         <li><button type="button" class="footer-legal-link" id="openCookieSettingsBtn">Çerez Tercihlerini Yönet</button></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h4>İletişim</h4>
+                    <h4>Ticari Künye &amp; İletişim</h4>
                     <ul class="footer-contact-list">
                         <li>
-                            <strong>Telefon:</strong>
+                            <strong>Ticari Ünvan:</strong>
+                            <span>Mutlu PVC ve Alüminyum Doğrama Sistemleri</span>
+                        </li>
+                        <li>
+                            <strong>Hizmet Merkezi:</strong>
+                            <span>Düzce Merkez &amp; Çevre İller (Kaynaşlı, Yığılca, Boğaziçi, Ağva, Kocaeli)</span>
+                        </li>
+                        <li>
+                            <strong>Telefon &amp; WhatsApp:</strong>
                             <a href="tel:+905071908181">0507 190 81 81</a>
                         </li>
                         <li>
-                            <strong>WhatsApp:</strong>
-                            <a href="https://wa.me/905071908181" target="_blank" rel="noopener noreferrer">0507 190 81 81</a>
+                            <strong>Çalışma Saatleri:</strong>
+                            <span>Pazartesi - Cumartesi: 08:30 - 19:30</span>
                         </li>
                         <li>
                             <strong>Instagram:</strong>
                             <a href="https://www.instagram.com/mutlupvcaluminyum/" target="_blank" rel="noopener noreferrer">@mutlupvcaluminyum</a>
-                        </li>
-                        <li>
-                            <strong>Hizmet Bölgesi:</strong>
-                            <span>Düzce (Merkez, Kaynaşlı, Yığılca, Boğaziçi) ve Çevre İller (İstanbul Ağva, Kocaeli)</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear">2026</span> Mutlu PVC ve Alüminyum (mutlupvcaluminyum.com). Tüm hakları saklıdır.</p>
+                <p>&copy; <span id="currentYear">2026</span> Mutlu PVC ve Alüminyum Doğrama Sistemleri (mutlupvcaluminyum.com). Tüm hakları saklıdır.</p>
                 <div class="footer-bottom-links">
-                    <button type="button" class="footer-bottom-btn" data-open-legal="kvkk">KVKK</button>
-                    <span>•</span>
-                    <button type="button" class="footer-bottom-btn" data-open-legal="gizlilik">Gizlilik</button>
+                    <button type="button" class="footer-bottom-btn" data-open-legal="kvkk">KVKK Aydınlatma Metni</button>
                     <span>•</span>
                     <button type="button" class="footer-bottom-btn" data-open-legal="cerez">Çerez Politikası</button>
                     <span>•</span>
-                    <button type="button" class="footer-bottom-btn" data-open-legal="kullanim">Yasal Uyarı</button>
+                    <button type="button" class="footer-bottom-btn" data-open-legal="kullanim">Ön Keşif Koşulları</button>
+                    <span>•</span>
+                    <button type="button" class="footer-bottom-btn" data-open-legal="gizlilik">Gizlilik Politikası</button>
                 </div>
             </div>
         </div>
@@ -1460,9 +1498,9 @@
 
             <div class="legal-tabs" role="tablist" aria-label="Yasal Metin Sekmeleri">
                 <button type="button" class="legal-tab-btn active" data-legal-tab="kvkk" role="tab" aria-selected="true">KVKK Aydınlatma Metni</button>
-                <button type="button" class="legal-tab-btn" data-legal-tab="gizlilik" role="tab" aria-selected="false">Gizlilik Politikası</button>
+                <button type="button" class="legal-tab-btn" data-legal-tab="kullanim" role="tab" aria-selected="false">Ön Keşif Koşulları &amp; Yasal Uyarı</button>
                 <button type="button" class="legal-tab-btn" data-legal-tab="cerez" role="tab" aria-selected="false">Çerez Politikası &amp; Ayarlar</button>
-                <button type="button" class="legal-tab-btn" data-legal-tab="kullanim" role="tab" aria-selected="false">Kullanım Koşulları &amp; Yasal Uyarı</button>
+                <button type="button" class="legal-tab-btn" data-legal-tab="gizlilik" role="tab" aria-selected="false">Gizlilik Politikası</button>
             </div>
 
             <div class="legal-modal-body">
@@ -1470,21 +1508,21 @@
                 <div class="legal-tab-panel active" id="legal-panel-kvkk" role="tabpanel">
                     <h4>6698 Sayılı Kişisel Verilerin Korunması Kanunu (KVKK) Aydınlatma Metni</h4>
                     <p><strong>1. Veri Sorumlusunun Kimliği:</strong><br>
-                    6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca, kişisel verileriniz; veri sorumlusu sıfatıyla Düzce Merkez adresinde faaliyet gösteren <strong>Mutlu PVC ve Alüminyum</strong> (İletişim: <a href="tel:+905071908181">0507 190 81 81</a>, Web: <code>https://mutlupvcaluminyum.com</code>) tarafından aşağıda açıklanan kapsamda hukuka ve dürüstlük kurallarına uygun olarak işlenmektedir.</p>
+                    6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca, kişisel verileriniz; veri sorumlusu sıfatıyla <strong>Mutlu PVC ve Alüminyum - Düzce</strong> (Ünvan: Mutlu PVC ve Alüminyum Doğrama Sistemleri, Hizmet Merkezi: Düzce Merkez &amp; Çevre İller, İletişim Numarası: <a href="tel:+905071908181">0507 190 81 81</a>, Web: <code>https://mutlupvcaluminyum.com</code>) tarafından aşağıda açıklanan kapsamda hukuka ve dürüstlük kurallarına uygun olarak işlenmektedir.</p>
 
-                    <p><strong>2. İşlenen Kişisel Veriler ve İşleme Amaçları:</strong><br>
-                    İnternet sitemizde yer alan <em>Ölçü ve Teklif Hesaplama Formu</em>, <em>Geri Bildirim Formu</em>, telefon veya WhatsApp iletişim kanallarımız aracılığıyla kendi rızanızla paylaştığınız; Ad-Soyad, Telefon Numarası, İlçe/Bölge bilgisi, talep ettiğiniz hizmet ve yaklaşık ölçü bilgileriniz şu amaçlarla işlenmektedir:</p>
+                    <p><strong>2. İşlenen Kişisel Veriler ve Sadece Ön Keşif / Fiyatlandırma Amacıyla İşleme:</strong><br>
+                    İnternet sitemizde yer alan <em>Ölçü ve Teklif Hesaplama Formu</em>, <em>Geri Bildirim Formu</em>, telefon veya WhatsApp iletişim kanallarımız aracılığıyla kendi rızanızla paylaştığınız bilgileriniz sunucularımızda kaydedilmez; <strong>yalnızca ön keşif organizasyonu, yaklaşık fiyatlandırma yapılması ve talebinize dönüş sağlanması amacıyla</strong> işlenmektedir:</p>
                     <ul>
                         <li>Cam balkon, kış bahçesi, PVC doğrama, alüminyum doğrama, korkuluk ve sineklik hizmetlerimiz için ön fiyat teklifi oluşturulması ve ücretsiz yerinde keşif organizasyonunun yapılması,</li>
                         <li>Müşteri memnuniyeti, geri bildirim, öneri ve satış sonrası teknik destek/servis taleplerinizin sonuçlandırılması,</li>
                         <li>6502 sayılı Tüketicinin Korunması Hakkında Kanun ve ilgili mevzuat kapsamındaki yükümlülüklerin yerine getirilmesi.</li>
                     </ul>
 
-                    <p><strong>3. Kişisel Verilerin Aktarılması:</strong><br>
-                    Web sitemiz üzerindeki formlar doğrudan cihazınızdaki <strong>WhatsApp</strong> uygulamasını tetikleyerek mesaj gönderimi esasına göre çalışmaktadır. Kişisel verileriniz üçüncü kişi reklam firmalarına satılmaz veya pazarlama amacıyla paylaşılmaz; yalnızca yasal zorunluluk halinde yetkili kamu kurum ve kuruluşlarıyla paylaşılabilir.</p>
+                    <p><strong>3. Kişisel Verilerin Aktarılması ve Sunucusuz İletim:</strong><br>
+                    Web sitemiz üzerindeki formlar girdiğiniz bilgileri herhangi bir veritabanına kaydetmez; doğrudan kendi cihazınızdaki <strong>WhatsApp</strong> uygulamasını tetikleyerek mesaj gönderimi esasına göre çalışır. Kişisel verileriniz üçüncü kişi reklam firmalarına satılmaz veya pazarlama amacıyla paylaşılmaz.</p>
 
-                    <p><strong>4. Kişisel Veri Toplamanın Yöntemi ve Hukuki Sebebi:</strong><br>
-                    Verileriniz, web sitemizdeki elektronik formlar ve iletişim butonları aracılığıyla KVKK’nın 5. maddesinde belirtilen <em>“bir sözleşmenin kurulması veya ifasıyla doğrudan doğruya ilgili olması”</em>, <em>“veri sorumlusunun hukuki yükümlülüğünü yerine getirebilmesi”</em> ve açık rızanız hukuki sebeplerine dayanılarak toplanmaktadır.</p>
+                    <p><strong>4. Çerez (Cookie) Bilgilendirmesi:</strong><br>
+                    Sitemizde yalnızca sitenin güvenli çalışması, dil/ölçü birimi tercihlerinizin hatırlanması ve çerez onay bilginizin saklanması amacıyla zorunlu ve işlevsel çerezler (<code>localStorage</code>) kullanılmaktadır. Detaylı ayarları <em>Çerez Politikası &amp; Ayarlar</em> sekmesinden yönetebilirsiniz.</p>
 
                     <p><strong>5. KVKK Madde 11 Kapsamındaki Haklarınız:</strong><br>
                     Kişisel veri sahibi olarak KVKK’nın 11. maddesi uyarınca; verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, amacına uygun kullanılıp kullanılmadığını öğrenme, eksik veya yanlış işlenmişse düzeltilmesini ve silinmesini talep etme haklarına sahipsiniz. Taleplerinizi <strong>0507 190 81 81</strong> numaralı iletişim hattımız üzerinden bize iletebilirsiniz.</p>
@@ -1602,15 +1640,16 @@
     <!-- Sabit WhatsApp ve Telefon Arama Butonları (Masaüstünde Sağ Altta, Mobilde Tam Genişlik Ergonomik Alt Çubuk) -->
     <div class="floating-actions" aria-label="Hızlı İletişim Butonları">
         <a href="tel:+905071908181" class="fab-btn fab-phone" aria-label="Telefonla Hemen Ara: 0507 190 81 81" title="Hemen Ara: 0507 190 81 81">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            <span class="fab-label">Hemen Ara</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span class="fab-label-desktop">Hemen Ara</span>
+            <span class="fab-label-mobile">Hemen Ara: 0507 190 81 81</span>
         </a>
-        <a href="https://wa.me/905071908181?text=Merhaba%20Mutlu%20PVC%20ve%20Al%C3%BCminyum%2C%20bilgi%20ve%20fiyat%20teklifi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="fab-btn fab-whatsapp" aria-label="WhatsApp'tan Mesaj Gönder" title="WhatsApp'tan Hızlı Fiyat Al">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.625.846 5.059 2.284 7.033l-1.494 5.46 5.601-1.469c1.908 1.252 4.185 1.976 6.609 1.976 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>
-            <span class="fab-label">WhatsApp Fiyat Al</span>
+        <a href="https://wa.me/905071908181?text=Merhaba%20Mutlu%20PVC%20ve%20Al%C3%BCminyum%2C%20bilgi%20ve%20fiyat%20teklifi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="fab-btn fab-whatsapp" aria-label="WhatsApp'tan Fiyat Al" title="WhatsApp'tan Fiyat Al">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.625.846 5.059 2.284 7.033l-1.494 5.46 5.601-1.469c1.908 1.252 4.185 1.976 6.609 1.976 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>
+            <span class="fab-label">WhatsApp'tan Fiyat Al</span>
         </a>
     </div>
 
-    <script src="js/main.js?v=2.3"></script>
+    <script src="js/main.js?v=2.4"></script>
 </body>
 </html>
